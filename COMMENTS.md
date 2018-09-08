@@ -20,8 +20,8 @@ ORM assumptions
   Order could be canceled, it means at we should return OrderItem products to the Store
   
 #Not realized requirements:
-Logs
-Tests
+ - Logs
+ - Tests
     - It just should be! But 8 hours limit not enough, to work in TDD mode.
     
 My daughter, asked to help me, so here is her comment: ";it5l3jjjjjttt7r;2fm"
