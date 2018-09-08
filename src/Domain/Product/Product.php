@@ -13,6 +13,10 @@ use Ramsey\Uuid\UuidInterface;
 class Product extends EventSourcedAggregateRoot {
 	/** @var UuidInterface */
 	private $uuid;
+	/** @var  string */
+	private $name;
+	/** @var  string */
+	private $type;
 
 	/**
 	 * @return string
