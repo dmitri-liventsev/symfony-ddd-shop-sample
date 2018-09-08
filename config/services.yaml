@@ -7,13 +7,53 @@ parameters:
     locale: 'en'
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+          $elasticConfig: '%elastic%'
+
+          $queryBus: '@tactician.commandbus.query'
+          $commandBus: '@tactician.commandbus.command'
+          $eventBus: '@broadway.event_handling.event_bus'
+
+          $eventStore: '@Broadway\EventStore\Dbal\DBALEventStore'
+
+          $eventProducer: '@old_sound_rabbit_mq.events_producer'
+
+    _instanceof:
+
+        App\Application\Command\CommandHandlerInterface:
+          public: true
+          tags:
+              - { name: tactician.handler, typehints: true, bus: command }
+
+        App\Application\Query\QueryHandlerInterface:
+          public: true
+          tags:
+              - { name: tactician.handler, typehints: true, bus: query }
+
+        Broadway\EventHandling\EventListener:
+          public: true
+          tags:
+              - { name: broadway.domain.event_listener }
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/**/{Migrations,EventSubscriber}'
+
+    ### Event Store
+
+    Broadway\EventStore\Dbal\DBALEventStore:
+        public: true
+        arguments:
+          - '@doctrine.dbal.default_connection'
+          - '@broadway.serializer.payload'
+          - '@broadway.serializer.metadata'
+          - 'events'
+          - 'false'
+          - '@broadway.uuid.converter'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -32,3 +72,13 @@ services:
     App\UI\Http\Rest\Controller\:
         resource: '../src/UI/Http/Rest/Controller/*'
         tags: [ 'controller.service_arguments' ]
+
+    ### UI Listeners
+
+    App\UI\Http\Rest\EventSubscriber\ExceptionSubscriber:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.exception' }
+
+    App\UI\Http\Rest\EventSubscriber\JsonBodyParserSubscriber:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest', priority: 100 }
