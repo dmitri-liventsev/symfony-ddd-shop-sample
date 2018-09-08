@@ -3,7 +3,7 @@
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 
-namespace App\Application\Query\Order\PurchaseProduct;
+namespace App\Application\Query\Order\FindAllCustomerOrders;
 
 use App\Application\Query\Collection;
 use App\Application\Query\QueryHandlerInterface;
@@ -20,7 +20,7 @@ class FindAllCustomerOrdersHandler implements QueryHandlerInterface{
 		$this->repository = $repository;
 	}
 
-	public function __invoke(FindAllProductsQuery $query): Collection
+	public function __invoke(FindAllCustomerOrdersQuery $query): Collection
 	{
 		$items = $this->repository->findAllByUserUuid($query->userUuid);
 

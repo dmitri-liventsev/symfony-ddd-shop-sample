@@ -3,7 +3,7 @@
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 
-namespace App\Application\Query\Product\PurchaseProduct;
+namespace App\Application\Query\Product\FindAllProducts;
 
 use App\Application\Query\Collection;
 use App\Application\Query\QueryHandlerInterface;

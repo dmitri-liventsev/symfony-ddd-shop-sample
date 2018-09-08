@@ -3,7 +3,7 @@
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 
-namespace App\Application\Command\Profile;
+namespace App\Application\Command\Profile\ChangeProfile;
 
 
 use App\Domain\Profile\ObjectValue\Address;

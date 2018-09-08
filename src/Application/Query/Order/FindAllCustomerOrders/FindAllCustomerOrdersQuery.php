@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Query\Order\PurchaseProduct;
+namespace App\Application\Query\Order\FindAllCustomerOrders;
 
 use Ramsey\Uuid\UuidInterface;
 

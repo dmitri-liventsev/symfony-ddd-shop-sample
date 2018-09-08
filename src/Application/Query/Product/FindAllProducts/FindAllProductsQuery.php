@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Query\Product\PurchaseProduct;
+namespace App\Application\Query\Product\FindAllProducts;
 
 use Ramsey\Uuid\UuidInterface;
 
