@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+	<entity name="App\Infrastructure\Order\Entity\Customer" table="order_customer">
+		<id name="uuid" type="uuid_binary" column="uuid"/>
+		<field name="UserUuid" type="uuid_binary" column="user_uuid"/>
+	</entity>
+</doctrine-mapping>

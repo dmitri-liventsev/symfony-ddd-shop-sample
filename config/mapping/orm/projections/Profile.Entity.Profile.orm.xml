@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+	<entity name="App\Infrastructure\Profile\Entity\Profile" table="profile">
+		<id name="uuid" type="uuid_binary" column="uuid"/>
+		<field name="userUuid" type="uuid_binary" column="user_uuid"/>
+		<embedded name="address" class="App\Domain\Profile\ValueObject\Address"/>
+		<embedded name="contact" class="App\Domain\Profile\ValueObject\Contact"/>
+	</entity>
+</doctrine-mapping>

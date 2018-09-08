@@ -9,6 +9,10 @@ Not implemented ObjectValues:
  - Product.Contact.Email
  - Product.Contact.Phone
  
+ORM assumptions
+	Product type should be entity, not a string
+  Foreign keys between Order_item - Product, Order_Customer - User was excluded, to avoid any cascade deletion. Orders should stay on the system
+  
  Not implemented features:
   Order should contain collection of OrderItems.
   Order should contain worked statuses, and handle in async mode.

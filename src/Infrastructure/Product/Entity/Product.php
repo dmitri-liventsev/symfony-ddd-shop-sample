@@ -22,17 +22,22 @@ class Product implements ProductViewInterface {
 	/** @var  String */
 	private $productType;
 
+	/** @var  int */
+	private $price;
+
 	/**
 	 * Product constructor.
 	 *
 	 * @param $uuid
 	 * @param $productsOnStock
 	 * @param $productType
+	 * @param $price
 	 */
-	public function __construct($uuid, $productsOnStock, $productType) {
+	public function __construct($uuid, $productsOnStock, $productType, $price) {
 		$this->uuid = is_string($uuid) ? Uuid::fromString($uuid) : $uuid;
 		$this->productsOnStock = $productsOnStock;
 		$this->productType = $productType;
+		$this->price = $price;
 	}
 
 	public static function fromSerializable(Serializable $event): self
@@ -41,7 +46,7 @@ class Product implements ProductViewInterface {
 	}
 
 	public static function deserialize($data) {
-		return new self($data["uuid"], $data["products_on_stock"], $data["product_type"]);
+		return new self($data["uuid"], $data["products_on_stock"], $data["product_type"], $data["price"]);
 	}
 
 	public function getUuid(): UuidInterface {

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Domain\Profile\Event;
-use App\Domain\Profile\ObjectValue\Address;
-use App\Domain\Profile\ObjectValue\Contact;
+use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Contact;
 use Ramsey\Uuid\UuidInterface;
 
 /**

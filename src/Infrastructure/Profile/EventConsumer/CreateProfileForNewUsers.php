@@ -5,8 +5,8 @@
 
 namespace App\Infrastructure\Profile\EventConsumer;
 
-use App\Domain\Profile\ObjectValue\Address;
-use App\Domain\Profile\ObjectValue\Contact;
+use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
 use App\Domain\User\Event\UserWasCreated;
 use App\Infrastructure\Profile\Entity\Profile;

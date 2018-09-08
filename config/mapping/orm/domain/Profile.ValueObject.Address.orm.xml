@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+	<embeddable name="App\Domain\Profile\ValueObject\Address">
+		<field name="city" type="string" length="50" column="city"/>
+		<field name="street" type="string" length="50" column="street"/>
+		<field name="houseNumber" type="string" length="50" column="house_number"/>
+	</embeddable>
+</doctrine-mapping>

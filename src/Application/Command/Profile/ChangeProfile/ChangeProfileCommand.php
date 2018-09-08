@@ -6,8 +6,8 @@
 namespace App\Application\Command\Profile\ChangeProfile;
 
 
-use App\Domain\Profile\ObjectValue\Address;
-use App\Domain\Profile\ObjectValue\Contact;
+use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Contact;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

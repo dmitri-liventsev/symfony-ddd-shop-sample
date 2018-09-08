@@ -3,7 +3,7 @@
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 
-namespace App\Domain\Profile\ObjectValue;
+namespace App\Domain\Profile\ValueObject;
 
 class Contact {
 	public $email;

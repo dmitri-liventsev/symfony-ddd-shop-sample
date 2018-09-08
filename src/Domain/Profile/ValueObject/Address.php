@@ -3,11 +3,8 @@
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 
-namespace App\Domain\Profile\ObjectValue;
+namespace App\Domain\Profile\ValueObject;
 
-
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class Address {
 	/** @var string */

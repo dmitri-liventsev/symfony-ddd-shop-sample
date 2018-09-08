@@ -6,8 +6,8 @@
 namespace App\Domain\Profile;
 
 
-use App\Domain\Profile\ObjectValue\Address;
-use App\Domain\Profile\ObjectValue\Contact;
+use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Event\ProfileWasUpdated;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Ramsey\Uuid\UuidInterface;

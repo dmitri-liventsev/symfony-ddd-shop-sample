@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Profile\Entity;
 
-use App\Domain\Profile\ObjectValue\Address;
-use App\Domain\Profile\ObjectValue\Contact;
+use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Projection\ProfileViewInterface;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
