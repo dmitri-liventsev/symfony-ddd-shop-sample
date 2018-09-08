@@ -2,6 +2,7 @@
 
 namespace App\Application\Query\Order\FindAllCustomerOrders;
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -17,10 +18,11 @@ class FindAllCustomerOrdersQuery {
 	 * FindAllQuery constructor.
 	 *
 	 * @param int $page
+	 * @param string $userUuid
 	 */
-	public function __construct($page, UuidInterface $userUuid) {
+	public function __construct($page, string $userUuid) {
 		$this->page     = $page;
-		$this->userUuid = $userUuid;
+		$this->userUuid = Uuid::fromString($userUuid);
 	}
 
 }

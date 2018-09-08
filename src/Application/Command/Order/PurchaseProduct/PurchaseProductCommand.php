@@ -23,14 +23,14 @@ class PurchaseProductCommand {
 	/**
 	 * PurchaseProductCommand constructor.
 	 *
-	 * @param UuidInterface $userUuid
-	 * @param UuidInterface $productUuid
+	 * @param string $userUuid
+	 * @param string $productUuid
 	 * @param int           $amount
 	 */
-	public function __construct(string $uuid, UuidInterface $userUuid, UuidInterface $productUuid, $amount) {
+	public function __construct(string $uuid, string $userUuid, string $productUuid, $amount) {
 		$this->uuid = Uuid::fromString($uuid);
-		$this->userUuid    = $userUuid;
-		$this->productUuid = $productUuid;
+		$this->userUuid    = Uuid::fromString($userUuid);
+		$this->productUuid = Uuid::fromString($productUuid);
 		$this->amount      = $amount;
 	}
 }

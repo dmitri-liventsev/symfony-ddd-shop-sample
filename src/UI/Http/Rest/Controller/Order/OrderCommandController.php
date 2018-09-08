@@ -20,11 +20,7 @@ class OrderCommandController extends CommandController {
 	 *     "/purchase",
 	 *     name="purchase",
 	 *     methods={"POST"}
-	 *     requirements={
-	 *      "user_uuid": "\d+",
-	 *      "product_uuid": "\d+",
-	 *      "amount": "\d+"
-	 * })
+	 *     )
 	 *
 	 * @throws \Assert\AssertionFailedException
 	 */

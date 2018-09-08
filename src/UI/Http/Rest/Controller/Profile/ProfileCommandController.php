@@ -20,15 +20,7 @@ class ProfileCommandController {
 	 *     "/profile",
 	 *     name="purchase",
 	 *     methods={"PUT"}
-	 *     requirements={
-	 *      "user_uuid": "\d+",
-	 *      "address_city": "\w+",
-	 *      "address_street": "\w+"
-	 *      "address_house_number": "\w+"
-	 *
-	 *      "contact_email": "\w+"
-	 *      "contact_phone": "\w+"
-	 * })
+	 *     )
 	 *
 	 * @throws \Assert\AssertionFailedException
 	 */

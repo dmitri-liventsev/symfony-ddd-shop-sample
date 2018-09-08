@@ -12,11 +12,11 @@ use Ramsey\Uuid\UuidInterface;
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 class OrderFactory {
-	public function purchaseProduct(UuidInterface $uuid, UuidInterface $userUuid, UuidInterface $productUuid, int $amount) {
+	public function purchaseProduct(UuidInterface $uuid, UuidInterface $userUuid, UuidInterface $productUuid, int $amount) : Order {
 
 		$customer = new Customer(Uuid::uuid4(), $userUuid);
 		$orderItem = new OrderItem(Uuid::uuid4(), $productUuid, $amount);
 
-		Order::create($uuid, $customer, $orderItem);
+		return Order::create($uuid, $customer, $orderItem);
 	}
 }

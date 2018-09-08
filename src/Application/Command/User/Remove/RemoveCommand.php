@@ -6,20 +6,21 @@
 namespace App\Application\Command\User\Remove;
 
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class RemoveCommand {
 
-	/** @var  UuidInterface */
+	/** @var UuidInterface */
 	public $uuid;
 
 	/**
 	 * RemoveCommand constructor.
 	 *
-	 * @param UuidInterface $uuid
+	 * @param string $uuid
 	 */
-	public function __construct(UuidInterface $uuid) {
-		$this->uuid = $uuid;
+	public function __construct(string $uuid) {
+		$this->uuid = Uuid::fromString($uuid);;
 	}
 
 

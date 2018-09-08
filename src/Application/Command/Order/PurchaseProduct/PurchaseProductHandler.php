@@ -25,6 +25,7 @@ class PurchaseProductHandler implements CommandHandlerInterface {
 
 	public function __invoke(PurchaseProductCommand $command): void
 	{
-		$this->orderFactory->purchaseProduct($command->uuid, $command->userUuid, $command->productUuid, $command->amount);
+		$order = $this->orderFactory->purchaseProduct($command->uuid, $command->userUuid, $command->productUuid, $command->amount);
+		$this->orderStore->store($order);
 	}
 }
