@@ -27,4 +27,4 @@ git clone
 composer install
 php ./bin/console d:d:c
 php ./bin/console d:s:c
-php console d:m:e --up 20180908190647
+php ./bin/console d:m:e --up 20180908190647
