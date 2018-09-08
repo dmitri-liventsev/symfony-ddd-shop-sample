@@ -3,7 +3,7 @@ namespace App\Infrastructure\User\EventConsumer;
 
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Event\UserWasRemoved;
-use App\Domain\User\Query\Repository\UserReadModelRepositoryInterface;
+use App\Domain\User\Repository\UserModelRepositoryInterface;
 use App\Infrastructure\User\Entity\User;
 use Broadway\ReadModel\Projector;
 
@@ -12,10 +12,10 @@ use Broadway\ReadModel\Projector;
  */
 class UserEventConsumer  extends Projector {
 
-	/** @var UserReadModelRepositoryInterface */
+	/** @var UserModelRepositoryInterface */
 	private $repository;
 
-	public function __construct(UserReadModelRepositoryInterface $repository)
+	public function __construct(UserModelRepositoryInterface $repository)
 	{
 		$this->repository = $repository;
 	}
