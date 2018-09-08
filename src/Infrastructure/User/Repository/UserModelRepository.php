@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\User\Repository;
 
-use App\Domain\User\Projections\UserViewInterface;
-use App\Domain\User\Query\Repository\UserReadModelRepositoryInterface;
+use App\Domain\User\Projection\UserViewInterface;
+use App\Domain\User\Repository\UserModelRepositoryInterface;
 use App\Domain\User\Repository\CheckUserByEmailInterface;
 use App\Domain\User\ValueObject\Email;
 use App\Infrastructure\Common\Repository\MysqlRepository;
@@ -14,7 +14,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
-class UserModelRepository extends MysqlRepository implements UserReadModelRepositoryInterface, CheckUserByEmailInterface{
+class UserModelRepository extends MysqlRepository implements UserModelRepositoryInterface, CheckUserByEmailInterface{
 
 	public function __construct(EntityManagerInterface $entityManager)
 	{
@@ -74,8 +74,8 @@ class UserModelRepository extends MysqlRepository implements UserReadModelReposi
 		$this->register($userRead);
 	}
 
-	public function remove(UserViewInterface $userRead): void
+	public function remove($userRead): void
 	{
-		$this->register($userRead);
+		$this->remove($userRead);
 	}
 }

@@ -1,7 +1,9 @@
 <?php
+
+namespace App\Infrastructure\Product\EventConsumer;
+
 use App\Domain\Order\Event\OrderWasCreated;
 use App\Domain\Product\Repository\ProductModelRepositoryInterface;
-use App\Infrastructure\Order\Entity\Order;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>

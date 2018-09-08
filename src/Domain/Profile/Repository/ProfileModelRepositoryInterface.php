@@ -10,6 +10,6 @@ use Ramsey\Uuid\UuidInterface;
 
 interface ProfileModelRepositoryInterface {
 	public function oneByUserUuid(UuidInterface $uuid) : ProfileViewInterface;
-	public function remove(ProfileViewInterface $profile);
+	public function remove($profile);
 	public function add(ProfileViewInterface $profile);
 }

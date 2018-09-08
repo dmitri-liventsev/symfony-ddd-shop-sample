@@ -4,7 +4,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 	<entity name="App\Infrastructure\Order\Entity\Order" table="order">
 		<id name="uuid" type="uuid_binary" column="uuid"/>
-		<one-to-one field="order_item" target-entity="OrderItem" mapped-by="order" />
-		<one-to-one field="customer" target-entity="Customer" mapped-by="order" />
+		<one-to-one field="orderItem" target-entity="OrderItem">
+			<join-column name="order_item_uuid" referenced-column-name="uuid" />
+		</one-to-one>
+		<one-to-one field="customer" target-entity="Customer">
+			<join-column name="customer_uid" referenced-column-name="uuid" />
+		</one-to-one>
 	</entity>
 </doctrine-mapping>

@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Infrastructure\Product\Repository;
+
 use App\Domain\Product\Projection\ProductViewInterface;
 use App\Domain\Product\Repository\ProductModelRepositoryInterface;
 use App\Infrastructure\Common\Repository\MysqlRepository;

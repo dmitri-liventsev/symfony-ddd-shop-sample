@@ -18,7 +18,13 @@ class ProfileModelRepository extends MysqlRepository implements ProfileModelRepo
 		parent::__construct($entityManager);
 	}
 
-	public function oneByUserUuid(\Ramsey\Uuid\UuidInterface $uuid): ProfileViewInterface {
+    /**
+     * @param \Ramsey\Uuid\UuidInterface $uuid
+     * @return ProfileViewInterface
+     * @throws \App\Domain\Common\Repository\Exception\NotFoundException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function oneByUserUuid(\Ramsey\Uuid\UuidInterface $uuid): ProfileViewInterface {
 		$qb = $this->repository
 			->createQueryBuilder('user')
 			->where('user.uuid = :uuid')

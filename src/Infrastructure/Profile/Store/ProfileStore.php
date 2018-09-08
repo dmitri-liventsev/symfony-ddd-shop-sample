@@ -1,4 +1,8 @@
 <?php
+
+namespace App\Infrastructure\Profile\Store;
+
+
 use App\Domain\Profile\Profile;
 use App\Domain\Profile\Repository\ProfileStoreInterface;
 use Broadway\EventSourcing\EventSourcingRepository;

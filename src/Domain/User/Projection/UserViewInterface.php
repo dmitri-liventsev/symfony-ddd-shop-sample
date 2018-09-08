@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\Projections;
+namespace App\Domain\User\Projection;
 
 use App\Domain\User\ValueObject\Email;
 use Broadway\ReadModel\SerializableReadModel;
