@@ -16,7 +16,7 @@ for DDD which i have ever seen. In real project i will just  fork it, but to stu
 ###Domain layer
 
 The domain layer will be divided to next domains: 
-- **User** (SignUp, SignUp, Unregister, Authorization, Inentification)
-- **Product** (Keep information of available books on the store, and reduce/increase that amount)
+- **User** SignUp, SignUp, Unregister, Authorization, Inentification
+- **Product** Keep information of available products and them types(Book is one of the type) on the store, and reduce/increase that amount
 - **Order** The "heart" of the project, here should initialize main events what should initialize "Purchase" and "Delivery" proccess, here it is necessary implement own Customer entity, what should stay even at user will be removed.
 - **Profile**  Just profile information, update and remove it when user unregister self, or ask it by GDPR reason
