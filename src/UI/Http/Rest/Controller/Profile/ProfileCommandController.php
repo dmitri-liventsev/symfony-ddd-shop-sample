@@ -11,6 +11,7 @@ use App\Domain\Profile\ObjectValue\Contact;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileCommandController {
 

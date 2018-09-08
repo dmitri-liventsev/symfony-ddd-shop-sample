@@ -5,13 +5,13 @@
 
 namespace App\UI\Http\Rest\Controller\Order;
 
-
 use App\Application\Command\Order\PurchaseProduct\PurchaseProductCommand;
 use App\UI\Http\Rest\Controller\CommandController;
 use Assert\Assertion;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class OrderCommandController extends CommandController {
 

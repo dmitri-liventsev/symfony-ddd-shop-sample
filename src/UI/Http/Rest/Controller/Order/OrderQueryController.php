@@ -7,6 +7,7 @@ use App\UI\Http\Rest\Controller\QueryController;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
