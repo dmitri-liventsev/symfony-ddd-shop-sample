@@ -19,8 +19,12 @@ class OrderCommandController extends CommandController {
 	 * @Route(
 	 *     "/purchase",
 	 *     name="purchase",
-	 *     methods={"POST"}
-	 *     )
+	 *     methods={"POST"},
+	 *     requirements={
+	 *      "user_uuid": "\d+",
+	 *      "product_uuid": "\d+",
+	 *      "amount": "\d+"
+	 * })
 	 *
 	 * @throws \Assert\AssertionFailedException
 	 */

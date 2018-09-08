@@ -5,8 +5,7 @@
 
 namespace App\UI\Http\Rest\Controller\Product;
 
-
-use App\Application\Query\Product\PurchaseProduct\FindAllProductsQuery;
+use App\Application\Query\Product\FindAllProducts\FindAllProductsQuery;
 use App\UI\Http\Rest\Controller\QueryController;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\JsonResponse;

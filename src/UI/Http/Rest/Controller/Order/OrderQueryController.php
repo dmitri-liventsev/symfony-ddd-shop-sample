@@ -2,7 +2,7 @@
 
 namespace App\UI\Http\Rest\Controller\Order;
 
-use App\Application\Query\Order\PurchaseProduct\FindAllCustomerOrdersQuery;
+use App\Application\Query\Order\FindAllCustomerOrders\FindAllCustomerOrdersQuery;
 use App\UI\Http\Rest\Controller\QueryController;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\JsonResponse;
