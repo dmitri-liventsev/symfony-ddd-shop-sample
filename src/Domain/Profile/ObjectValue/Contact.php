@@ -6,8 +6,8 @@
 namespace App\Domain\Profile\ObjectValue;
 
 class Contact {
-	private $email;
-	private $phone;
+	public $email;
+	public $phone;
 
 	/**
 	 * Contact constructor.

@@ -6,10 +6,18 @@
 namespace App\Domain\Profile\ObjectValue;
 
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
 class Address {
-	private $city;
-	private $street;
-	private $houseNumber;
+	/** @var string */
+	public $city;
+
+	/** @var string */
+	public $street;
+
+	/** @var string */
+	public $houseNumber;
 
 	/**
 	 * Address constructor.
@@ -23,6 +31,4 @@ class Address {
 		$this->street      = $street;
 		$this->houseNumber = $houseNumber;
 	}
-
-
 }

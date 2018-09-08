@@ -19,7 +19,6 @@ class ReduceNumberOfProductsConsumer {
 	}
 
 	protected function applyOrderWasCreated(OrderWasCreated $event) {
-
 		$productUuid = $event['orderItem']['product_uuid'];
 		$amount = $event['orderItem']['amount'];
 

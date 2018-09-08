@@ -10,7 +10,7 @@ use Broadway\Serializer\Serializable;
 
 final class UserWasRemoved  implements Serializable{
 
-	private $uuid;
+	public $uuid;
 
 	/**
 	 * UserWasRemoved constructor.
