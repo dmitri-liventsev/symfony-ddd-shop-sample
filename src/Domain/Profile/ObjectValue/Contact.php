@@ -6,5 +6,17 @@
 namespace App\Domain\Profile\ObjectValue;
 
 class Contact {
+	private $email;
+	private $phone;
 
+	/**
+	 * Contact constructor.
+	 *
+	 * @param $email
+	 * @param $phone
+	 */
+	public function __construct($email, $phone) {
+		$this->email = $email;
+		$this->phone = $phone;
+	}
 }

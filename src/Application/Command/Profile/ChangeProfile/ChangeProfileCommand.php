@@ -8,6 +8,7 @@ namespace App\Application\Command\Profile;
 
 use App\Domain\Profile\ObjectValue\Address;
 use App\Domain\Profile\ObjectValue\Contact;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class ChangeProfileCommand {
@@ -23,12 +24,12 @@ class ChangeProfileCommand {
 	/**
 	 * ChangeProfileCommand constructor.
 	 *
-	 * @param UuidInterface $uuid
+	 * @param string $uuid
 	 * @param Address       $address
 	 * @param Contact       $contact
 	 */
-	public function __construct(UuidInterface $uuid, Address $address, Contact $contact) {
-		$this->uuid    = $uuid;
+	public function __construct(string $uuid, Address $address, Contact $contact) {
+		$this->uuid    = Uuid::fromString($uuid);
 		$this->address = $address;
 		$this->contact = $contact;
 	}
