@@ -6,16 +6,16 @@
 namespace App\Application\Command\User\Remove;
 
 use App\Application\Command\CommandHandlerInterface;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserStoreInterface;
 
 class RemoveCommandHandler implements CommandHandlerInterface{
 
 	/**
-	 * @var UserRepositoryInterface
+	 * @var UserStoreInterface
 	 */
 	private $userStore;
 
-	public function __construct(UserRepositoryInterface $userStore)
+	public function __construct(UserStoreInterface $userStore)
 	{
 		$this->userStore = $userStore;
 	}

@@ -7,7 +7,7 @@ namespace App\Domain\User\Repository;
 use App\Domain\User\User;
 use Ramsey\Uuid\UuidInterface;
 
-interface UserRepositoryInterface
+interface UserStoreInterface
 {
     public function get(UuidInterface $uuid): User;
 

@@ -2,12 +2,20 @@
 use App\Domain\Product\Projection\ProductViewInterface;
 use App\Domain\Product\Repository\ProductModelRepositoryInterface;
 use App\Infrastructure\Common\Repository\MysqlRepository;
+use App\Infrastructure\Product\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 class ProductModelRepository extends MysqlRepository implements ProductModelRepositoryInterface {
+
+	public function __construct(EntityManagerInterface $entityManager)
+	{
+		$this->class = Product::class;
+		parent::__construct($entityManager);
+	}
 
 	public function findAllAvailableProducts() {
 		$qb = $this->repository

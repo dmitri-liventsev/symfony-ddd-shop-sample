@@ -16,6 +16,12 @@ abstract class MysqlRepository
         $this->apply();
     }
 
+    public function remove($model): void
+    {
+        $this->entityManager->remove($model);
+        $this->apply();
+    }
+
     public function apply(): void
     {
         $this->entityManager->flush();

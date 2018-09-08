@@ -5,7 +5,7 @@ namespace App\Application\Command\User\SignUp;
 
 use App\Application\Command\CommandHandlerInterface;
 use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserStoreInterface;
 
 class SignUpHandler implements CommandHandlerInterface
 {
@@ -16,7 +16,7 @@ class SignUpHandler implements CommandHandlerInterface
         $this->userRepository->store($user);
     }
 
-    public function __construct(UserFactory $userFactory, UserRepositoryInterface $userRepository)
+    public function __construct(UserFactory $userFactory, UserStoreInterface $userRepository)
     {
         $this->userFactory = $userFactory;
         $this->userRepository = $userRepository;
@@ -28,7 +28,7 @@ class SignUpHandler implements CommandHandlerInterface
     private $userFactory;
 
     /**
-     * @var UserRepositoryInterface
+     * @var UserStoreInterface
      */
     private $userRepository;
 }
