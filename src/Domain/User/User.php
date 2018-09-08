@@ -24,9 +24,11 @@ class User  extends EventSourcedAggregateRoot{
 		return $user;
 	}
 
-	public function remove(UuidInterface $uuid, Credentials $credentials): self
+	public function remove(): self
 	{
-		$this->apply(new UserWasRemoved($uuid));
+		$this->apply(new UserWasRemoved($this->uuid));
+
+		return $this;
 	}
 
 	public function uuid(): string
