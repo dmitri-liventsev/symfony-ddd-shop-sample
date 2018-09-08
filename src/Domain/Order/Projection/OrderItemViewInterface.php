@@ -5,9 +5,9 @@
 
 namespace App\Domain\Order\Projection;
 
-use App\Domain\Product\Projection\ProductViewInterface;
+use Ramsey\Uuid\UuidInterface;
 
 interface OrderItemViewInterface {
-	public function getProduct() : ProductViewInterface;
+	public function getProductUuid() : UuidInterface;
 	public function getAmount() : int;
 }
