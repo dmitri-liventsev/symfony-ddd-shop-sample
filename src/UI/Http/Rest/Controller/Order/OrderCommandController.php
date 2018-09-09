@@ -31,12 +31,12 @@ class OrderCommandController extends CommandController {
 	public function purchase(Request $request) {
 		$userUuidString = $request->get('user_uuid');
 		$productUuidString = $request->get('product_uuid');
-		$amount = $request->get('amount');
+		$amount = (int) $request->get('amount');
 
 		Assertion::notNull($userUuidString, "Uuid can\'t be null");
 		Assertion::notNull($productUuidString, "Uuid can\'t be null");
 		Assertion::notNull($amount, "Uuid can\'t be null");
-		Assertion::integer($amount, "Page should be a number");
+		Assertion::integer($amount, "Amount should be a number");
 
 
 		$uuid = Uuid::uuid1();

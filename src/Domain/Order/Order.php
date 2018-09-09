@@ -29,6 +29,8 @@ class Order extends EventSourcedAggregateRoot {
 	public static function create(UuidInterface $uuid, Customer $customer, OrderItem $orderItem) : self {
 		$order = new self();
 		$order->apply(new OrderWasCreated($uuid, $customer, $orderItem));
+
+		return $order;
 	}
 
 	public static function cancel(UuidInterface $uuid) : self {

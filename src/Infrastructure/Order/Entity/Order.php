@@ -49,12 +49,12 @@ class Order implements OrderViewInterface, JsonSerializable {
 		$customer = Customer::deserialize($data["customer"]);
 		$orderItem = OrderItem::deserialize($data["order_item"]);
 
-		return new self($orderItem, $customer, $data["order_uuid"]);
+		return new self($orderItem, $customer, $data["uuid"]);
 	}
 
 	public function serialize() : array {
 		return [
-			'uuid' => $this->uuid,
+			'uuid' => $this->uuid->toString(),
 			'order_item' => $this->orderItem->serialize(),
 			'customer' => $this->customer->serialize(),
 		];

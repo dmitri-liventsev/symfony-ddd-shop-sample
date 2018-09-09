@@ -46,7 +46,7 @@ class Customer implements CustomerViewInterface {
 	 */
 	public static function deserialize(array $data): self
 	{
-		return new self($data["uuid"], $data["user_uuid"]);
+		return new self(Uuid::fromString($data["user_uuid"]), Uuid::fromString($data["uuid"]));
 	}
 
 	public function serialize() {

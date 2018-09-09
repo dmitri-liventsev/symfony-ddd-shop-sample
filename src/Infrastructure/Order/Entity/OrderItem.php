@@ -30,7 +30,7 @@ class OrderItem implements OrderItemViewInterface {
 	 */
 	public function __construct(UuidInterface $productUuid, $amount, $uuid) {
 		$this->uuid = is_string($uuid) ? Uuid::fromString($uuid) : $uuid;
-		$this->product = is_string($productUuid) ? Uuid::fromString($productUuid) : $productUuid;;
+		$this->productUuid = is_string($productUuid) ? Uuid::fromString($productUuid) : $productUuid;;
 		$this->amount  = $amount;
 	}
 
@@ -47,7 +47,7 @@ class OrderItem implements OrderItemViewInterface {
 	 */
 	public static function deserialize(array $data): self
 	{
-		return new self($data["product_uuid"], $data["amount"], $data["uuid"]);
+		return new self(Uuid::fromString($data["product_uuid"]), $data["amount"], Uuid::fromString($data["uuid"]));
 	}
 
 	public function serialize() {

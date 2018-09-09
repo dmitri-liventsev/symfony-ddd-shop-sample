@@ -19,7 +19,7 @@ class ProfileCommandController extends CommandController {
 	/**
 	 * @Route(
 	 *     "/profile",
-	 *     name="purchase",
+	 *     name="profile",
 	 *     methods={"PUT"},
 	 *     requirements={
 	 *      "user_uuid": "\d+",

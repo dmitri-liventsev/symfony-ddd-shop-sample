@@ -19,6 +19,8 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     public function onKernelException(GetResponseForExceptionEvent $event): void
     {
+    	var_dump($event->getException()->getMessage());
+    	var_dump($event->getException()->getTraceAsString()); exit;
         $exception = $event->getException();
 
         $response = new JsonResponse();

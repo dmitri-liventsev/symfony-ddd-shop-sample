@@ -47,8 +47,8 @@ class OrderWasCreated implements Serializable {
 				Uuid::fromString($data['uuid']['user_uuid'])
 			),
 			new OrderItem(
-				Uuid::fromString($data['orderItem']['uuid']),
-				Uuid::fromString($data['orderItem']['product_uuid']),
+				Uuid::fromString($data['order_item']['uuid']),
+				Uuid::fromString($data['order_item']['product_uuid']),
 				$data['orderItem']['amount']
 			)
 		);
@@ -60,7 +60,7 @@ class OrderWasCreated implements Serializable {
 	public function serialize(): array {
 		return [
 			'uuid' => $this->uuid->toString(),
-		    'orderItem' => [
+		    'order_item' => [
 		    	'uuid' => $this->orderItem->getUuid()->toString(),
 		    	'product_uuid' => $this->orderItem->getProductUuid()->toString(),
 		    	'amount' => $this->orderItem->getAmount()
