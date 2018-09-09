@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateBookCommand extends Command {
+class CreateProductCliCommand extends Command {
 	/**
 	 * @var CommandBus
 	 */
@@ -28,11 +28,12 @@ class CreateBookCommand extends Command {
 	protected function configure(): void
 	{
 		$this
-			->setName('app:create-book')
-			->setDescription('Given a uuid and email, generates a new user.')
+			->setName('app:create-product')
+			->setDescription('Given a uuid, name and type, generates a new product.')
 			->addArgument('name', InputArgument::REQUIRED, 'Product name')
+			->addArgument('price', InputArgument::OPTIONAL, 'Price')
 			->addArgument('type', InputArgument::OPTIONAL, 'Product type')
-			->addArgument('uuid', InputArgument::OPTIONAL, 'User Uuid')
+			->addArgument('uuid', InputArgument::OPTIONAL, 'Product Uuid')
 		;
 	}
 
@@ -45,7 +46,8 @@ class CreateBookCommand extends Command {
 		$command = new CreateProductCommand(
 			$uuid = ($input->getArgument('uuid') ?: Uuid::uuid4()->toString()),
 			$name = $input->getArgument('name'),
-			$type = $input->getArgument('type')
+			$price = $input->getArgument('price')?: 0,
+			$type = $input->getArgument('type')?: 'Book'
 		);
 
 		$this->commandBus->handle($command);
@@ -53,7 +55,7 @@ class CreateBookCommand extends Command {
 		$output->writeln('<info>Product Created: </info>');
 		$output->writeln('');
 		$output->writeln("Uuid: $uuid");
-		$output->writeln("Email: $name");
+		$output->writeln("Name: $name");
 		$output->writeln("Type: $type");
 	}
 }

@@ -25,7 +25,7 @@ class CreateProductCommandHandler implements CommandHandlerInterface {
 
 	public function __invoke(CreateProductCommand $command): void
 	{
-		$product = $this->productFactory->create($command->uuid, $command->name, $command->type);
+		$product = $this->productFactory->create($command->uuid, $command->name, $command->type, $command->price);
 		$this->productStore->store($product);
 	}
 }

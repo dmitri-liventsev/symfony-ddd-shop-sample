@@ -33,12 +33,20 @@ The domain layer will be divided to next domains:
   - DATABASE_USER=root
   - DATABASE_PASS=Test1234
 4. Create database and tables
-	- php ./bin/console d:d:c
-	- php ./bin/console d:s:c
-	- php ./bin/console d:m:e --up 20180908190647
+	- $ php ./bin/console d:d:c
+	- $ php ./bin/console d:s:c
+	- $ php ./bin/console d:m:e --up 20180908190647
 	
 	**NB!** Do not use that solution on live servers. Only migrations is available there!
 5. Run serve
 	- php ./bin/console s:r
 	
 	**NB!** Do not use that solution on live servers. You have to setup normal web server. Ngix or Apache
+	
+	
+##CLI commands:
+Create new user
+$ php ./bin/console app:create-user email@email.ru password
+
+Create new product
+$ php ./bin/console app:create-product email@email.ru password

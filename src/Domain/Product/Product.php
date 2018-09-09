@@ -29,8 +29,10 @@ class Product extends EventSourcedAggregateRoot {
 	}
 
 	public static function create(UuidInterface $uuid, $name, $type, $price) : self {
-		$order = new self();
-		$order->apply(new ProductWasCreated($uuid, $name, $type, $price));
+		$product = new self();
+		$product->apply(new ProductWasCreated($uuid, $name, $type, $price));
+
+		return $product;
 	}
 
 	protected function applyProductWasCreated(ProductWasCreated $event): void

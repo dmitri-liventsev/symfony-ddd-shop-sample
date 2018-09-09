@@ -9,7 +9,7 @@ use Ramsey\Uuid\UuidInterface;
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
 class ProductFactory {
-	public function create(UuidInterface $uuid, $name, $type) : Product {
-		return Order::create($uuid, $name, $type);
+	public function create(UuidInterface $uuid, $name, $type, $price) : Product {
+		return Product::create($uuid, $name, $type, (int) $price);
 	}
 }
