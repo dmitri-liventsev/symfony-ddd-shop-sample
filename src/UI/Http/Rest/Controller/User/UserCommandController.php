@@ -8,6 +8,7 @@ use App\Application\Command\User\Remove\RemoveCommand;
 use App\Application\Command\User\SignUp\SignUpCommand;
 use App\UI\Http\Rest\Controller\CommandController;
 use Assert\Assertion;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,15 +21,15 @@ final class UserCommandController extends CommandController
      *     name="user_create",
      *     methods={"POST"},
      *     requirements={
-     *      "uuid": "\d+",
-     *      "email": "\w+"
+     *      "email": "\w+",
+     *      "password": "\w+"
      * })
      *
      * @throws \Assert\AssertionFailedException
      */
     public function signUp(Request $request): JsonResponse
     {
-        $uuid = $request->get('uuid');
+        $uuid = $request->get('uuid', Uuid::uuid4()->toString());
         $email = $request->get('email');
         $plainPassword = $request->get('password');
 
