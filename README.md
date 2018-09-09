@@ -1,7 +1,7 @@
-##DDD Book Shop
-###Platform: PHP 7.1  Mysql
-###Framework: Symfony 4
-##Architecture
+## DDD Book Shop
+### Platform: PHP 7.1  Mysql
+### Framework: Symfony 4
+## Architecture
 
 Main patterns: DDD, CQRS, Event Sourcing
 
@@ -13,7 +13,7 @@ Booth Symfony bundles was spotted from https://github.com/jorge07/symfony-4-es-c
 for DDD which i have ever seen. In real project i will just  fork it, but to study i will implement it self.
 
 
-###Domain layer
+### Domain layer
 
 The domain layer will be divided to next domains: 
 - **User** SignUp, SignUp, Unregister, Authorization, Inentification
