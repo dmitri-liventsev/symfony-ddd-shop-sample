@@ -44,33 +44,33 @@ The domain layer will be divided to next domains:
 	**NB!** Do not use that solution on live servers. You have to setup normal web server. Ngix or Apache
 	
 	
-##CLI commands:
+#CLI commands:
 Create new user
 $ php ./bin/console app:create-user email@email.ru password
 
 Create new product
 $ php ./bin/console app:create-product NAME {product_on_stock} {price}
 
-## Endpoints:
+# Endpoints:
 
 ###Create new user
 $ curl -d "email=email@gmail.com&password=password" -X POST http://localhost:8000/api/users
 
-###Remove user
+##Remove user
 
 $ curl -X DELETE http://localhost:8000/api/user/{_USER_UUID_}
 
 ###Get products(books)
 $ curl -X GET http://127.0.0.1:8000/api/products/{_PAGE_}
 
-###Purchase a product(book)
+##Purchase a product(book)
 $ curl -d "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase
 
 
-###Get purchase history
+##Get purchase history
 $ curl -X GET http://127.0.0.1:8000/api/orders/{_USER_UUID_}/{_PAGE_}
 
-###Update profile
+##Update profile
 curl -X PUT http://127.0.0.1:8000/api/profile/{_USER_UUID_} -d "address_city=City&address_street=Street&address_house_number=1&contact_email=email@email.ru&contact_phone=123123"
 
 
