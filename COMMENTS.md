@@ -28,6 +28,6 @@ Migrations.
    - Symfony already has PSR 3 log system, just added event logging there!
  - Tests
     - It just should be! But 8 hours limit not enough, to work in TDD mode.
- 
+
 My daughter, asked to help me, so here is her comment: ";it5l3jjjjjttt7r;2fm"
   

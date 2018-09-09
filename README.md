@@ -72,3 +72,9 @@ $ curl -X GET http://127.0.0.1:8000/api/orders/{_USER_UUID_}/{_PAGE_}
 
 ###Update profile
 curl -X PUT http://127.0.0.1:8000/api/profile/{_USER_UUID_} -d "address_city=City&address_street=Street&address_house_number=1&contact_email=email@email.ru&contact_phone=123123"
+
+
+
+
+
+The goal seems unattainable until it is achieved
