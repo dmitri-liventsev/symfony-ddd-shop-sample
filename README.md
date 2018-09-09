@@ -24,8 +24,8 @@ The domain layer will be divided to next domains:
 
 
 ## Local app setup
-1. $ git clone
-2. $ composer install
+1. `$ git clone`
+2. `$ composer install`
 3. Setup DB in the .env file required ENV params:
   - DATABASE_HOST=127.0.0.1
   - DATABASE_PORT=3306
@@ -33,9 +33,9 @@ The domain layer will be divided to next domains:
   - DATABASE_USER=root
   - DATABASE_PASS=Test1234
 4. Create database and tables
-	- $ php ./bin/console d:d:c
-	- $ php ./bin/console d:s:c
-	- $ php ./bin/console d:m:e --up 20180908190647
+	- `$ php ./bin/console d:d:c`
+	- `$ php ./bin/console d:s:c`
+	- `$ php ./bin/console d:m:e --up 20180908190647`
 	
 	**NB!** Do not use that solution on live servers. Only migrations is available there!
 5. Run serve
@@ -46,34 +46,32 @@ The domain layer will be divided to next domains:
 	
 #CLI commands:
 Create new user
-$ php ./bin/console app:create-user email@email.ru password
+`$ php ./bin/console app:create-user email@email.ru password`
 
 Create new product
-$ php ./bin/console app:create-product NAME {product_on_stock} {price}
+`$ php ./bin/console app:create-product NAME {product_on_stock} {price}`
 
 # Endpoints:
 
 ###Create new user
-$ curl -d "email=email@gmail.com&password=password" -X POST http://localhost:8000/api/users
+`$ curl -d "email=email@gmail.com&password=password" -X POST http://localhost:8000/api/users`
 
 ##Remove user
 
-$ curl -X DELETE http://localhost:8000/api/user/{_USER_UUID_}
+`$ curl -X DELETE http://localhost:8000/api/user/{_USER_UUID_}`
 
-###Get products(books)
-$ curl -X GET http://127.0.0.1:8000/api/products/{_PAGE_}
+####Get products(books)
+`$ curl -X GET http://127.0.0.1:8000/api/products/{_PAGE_}`
 
-##Purchase a product(book)
-$ curl -d "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase
-
-
-##Get purchase history
-$ curl -X GET http://127.0.0.1:8000/api/orders/{_USER_UUID_}/{_PAGE_}
-
-##Update profile
-curl -X PUT http://127.0.0.1:8000/api/profile/{_USER_UUID_} -d "address_city=City&address_street=Street&address_house_number=1&contact_email=email@email.ru&contact_phone=123123"
+####Purchase a product(book)
+`$ curl -d "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase`
 
 
+####Get purchase history
+`$ curl -X GET http://127.0.0.1:8000/api/orders/{_USER_UUID_}/{_PAGE_}`
+
+####Update profile
+`$ curl -X PUT http://127.0.0.1:8000/api/profile/{_USER_UUID_} -d "address_city=City&address_street=Street&address_house_number=1&contact_email=email@email.ru&contact_phone=123123"`
 
 
 
