@@ -3,12 +3,12 @@ Not implemented ObjectValues:
  - Product.type
  - Product.price - should extend some Money class, there are few in open source.
  
- - Product.Address.City
- - Product.Address.Street
- - Product.Address.HouseNumber
+ - Profile.Address.City
+ - Profile.Address.Street
+ - Profile.Address.HouseNumber
  
- - Product.Contact.Email
- - Product.Contact.Phone
+ - Profile.Contact.Email
+ - Profile.Contact.Phone
   
 ORM assumptions
   Product type should be entity, not a string

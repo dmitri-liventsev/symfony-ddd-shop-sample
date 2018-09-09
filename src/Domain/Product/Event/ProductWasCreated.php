@@ -7,11 +7,18 @@ namespace App\Domain\Product\Event;
 
 
 use Broadway\Serializer\Serializable;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
-class ProductWasCreated implements Serializable{
-	private $uuid;
-	private $name;
-	private $type;
+class ProductWasCreated implements Serializable {
+	/** @var  UuidInterface */
+	public $uuid;
+	/** @var  string */
+	public $name;
+	/** @var  string */
+	public $type;
+	/** @var  int */
+	public $price;
 
 	/**
 	 * ProductWasCreated constructor.
@@ -20,23 +27,34 @@ class ProductWasCreated implements Serializable{
 	 * @param $name
 	 * @param $type
 	 */
-	public function __construct($uuid, $name, $type) {
+	public function __construct(UuidInterface $uuid, $name, $type, $price) {
 		$this->uuid = $uuid;
 		$this->name = $name;
 		$this->type = $type;
+		$this->price = $price;
 	}
 
 	/**
 	 * @return mixed The object instance
 	 */
 	public static function deserialize(array $data) {
-		// TODO: Implement deserialize() method.
+		return new self(
+			Uuid::fromString($data['uuid']),
+			$data['name'],
+			$data['type'],
+			$data['price']
+		);
 	}
 
 	/**
 	 * @return array
 	 */
 	public function serialize(): array {
-		// TODO: Implement serialize() method.
+		return [
+			'uuid' => $this->uuid->toString(),
+			'name' => $this->name,
+			'type' => $this->type,
+			'price' => $this->price,
+		];
 	}
 }

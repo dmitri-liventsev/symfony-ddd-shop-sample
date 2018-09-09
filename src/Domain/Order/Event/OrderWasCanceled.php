@@ -4,6 +4,7 @@ namespace App\Domain\Order\Event;
 use App\Domain\Order\Entity\Customer;
 use App\Domain\Order\Entity\OrderItem;
 use Broadway\Serializer\Serializable;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -24,16 +25,16 @@ class OrderWasCanceled implements Serializable {
 	}
 
 	/**
-	 * @return mixed The object instance
+	 * @return OrderWasCanceled The object instance
 	 */
 	public static function deserialize(array $data) {
-		// TODO: Implement deserialize() method.
+		return new self(Uuid::fromString($data['uuid']));
 	}
 
 	/**
 	 * @return array
 	 */
 	public function serialize(): array {
-		// TODO: Implement serialize() method.
+		return ['uuid' => $this->uuid->toString()];
 	}
 }

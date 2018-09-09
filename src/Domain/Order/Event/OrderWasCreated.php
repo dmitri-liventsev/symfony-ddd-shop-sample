@@ -4,6 +4,7 @@ namespace App\Domain\Order\Event;
 use App\Domain\Order\Entity\Customer;
 use App\Domain\Order\Entity\OrderItem;
 use Broadway\Serializer\Serializable;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -36,16 +37,38 @@ class OrderWasCreated implements Serializable {
 	}
 
 	/**
-	 * @return mixed The object instance
+	 * @return OrderWasCreated The object instance
 	 */
 	public static function deserialize(array $data) {
-		// TODO: Implement deserialize() method.
+		return new self(
+			Uuid::fromString($data['uuid']),
+			new Customer (
+				Uuid::fromString($data['customer']['uuid']),
+				Uuid::fromString($data['uuid']['user_uuid'])
+			),
+			new OrderItem(
+				Uuid::fromString($data['orderItem']['uuid']),
+				Uuid::fromString($data['orderItem']['product_uuid']),
+				$data['orderItem']['amount']
+			)
+		);
 	}
 
 	/**
 	 * @return array
 	 */
 	public function serialize(): array {
-		// TODO: Implement serialize() method.
+		return [
+			'uuid' => $this->uuid->toString(),
+		    'orderItem' => [
+		    	'uuid' => $this->orderItem->getUuid()->toString(),
+		    	'product_uuid' => $this->orderItem->getProductUuid()->toString(),
+		    	'amount' => $this->orderItem->getAmount()
+		    ],
+		    'customer' => [
+		    	'uuid' => $this->customer->getUuid()->toString(),
+		        'user_uuid' => $this->customer->getUserUuid()->toString()
+		    ]
+		];
 	}
 }

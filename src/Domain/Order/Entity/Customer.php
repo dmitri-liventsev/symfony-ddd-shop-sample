@@ -25,4 +25,34 @@ class Customer {
 		$this->uuid     = $uuid;
 		$this->userUuid = $userUuid;
 	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @param UuidInterface $uuid
+	 */
+	public function setUuid(UuidInterface $uuid) {
+		$this->uuid = $uuid;
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUserUuid(): UuidInterface {
+		return $this->userUuid;
+	}
+
+	/**
+	 * @param UuidInterface $userUuid
+	 */
+	public function setUserUuid(UuidInterface $userUuid) {
+		$this->userUuid = $userUuid;
+	}
+
+
 }

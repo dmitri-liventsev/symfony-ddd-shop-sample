@@ -5,11 +5,13 @@
 
 namespace App\Domain\User\Event;
 
-
 use Broadway\Serializer\Serializable;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class UserWasRemoved  implements Serializable{
 
+	/** @var  UuidInterface */
 	public $uuid;
 
 	/**
@@ -17,22 +19,21 @@ final class UserWasRemoved  implements Serializable{
 	 *
 	 * @param $uuid
 	 */
-	public function __construct($uuid) {
+	public function __construct(UuidInterface $uuid) {
 		$this->uuid = $uuid;
 	}
-
 
 	/**
 	 * @return mixed The object instance
 	 */
 	public static function deserialize(array $data) {
-		// TODO: Implement deserialize() method.
+		return new self(Uuid::fromString($data['uuid']));
 	}
 
 	/**
 	 * @return array
 	 */
 	public function serialize(): array {
-		// TODO: Implement serialize() method.
+		return ['uuid' => $this->uuid->toString()];
 	}
 }
