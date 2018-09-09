@@ -35,8 +35,8 @@ class UserEventConsumer extends Projector {
 	 */
 	protected function applyUserWasRemoved(UserWasRemoved $userWasRemoved): void
 	{
-		$userReadModel = User::fromSerializable($userWasRemoved);
+		$user = $this->repository->oneByUuid($userWasRemoved->uuid);
 
-		$this->repository->remove($userReadModel);
+		$this->repository->remove($user);
 	}
 }

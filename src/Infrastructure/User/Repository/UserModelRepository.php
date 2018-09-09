@@ -76,6 +76,6 @@ class UserModelRepository extends MysqlRepository implements UserModelRepository
 
 	public function remove($userRead): void
 	{
-		$this->remove($userRead);
+		parent::remove($userRead);
 	}
 }
