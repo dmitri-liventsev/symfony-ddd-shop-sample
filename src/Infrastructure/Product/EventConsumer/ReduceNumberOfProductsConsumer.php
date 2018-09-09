@@ -22,8 +22,8 @@ class ReduceNumberOfProductsConsumer extends Projector {
 	}
 
 	protected function applyOrderWasCreated(OrderWasCreated $event) {
-		$productUuid = $event['orderItem']['product_uuid'];
-		$amount = $event['orderItem']['amount'];
+		$productUuid = $event->orderItem->getProductUuid();
+		$amount = $event->orderItem->getAmount();
 
 		$product = $this->repository->oneByUuid($productUuid);
 		$product->reduceNumberOfProductsOnStock($amount);

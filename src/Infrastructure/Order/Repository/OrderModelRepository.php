@@ -22,9 +22,9 @@ class OrderModelRepository extends MysqlRepository implements OrderModelReposito
 
 	public function findAllByUserUuid(UuidInterface $userUuid) {
 		$qb = $this->repository
-			->createQueryBuilder('order')
-			->join('order.customer', 'customer')
-			->where('customer.uuid = :uuid')
+			->createQueryBuilder('shop_order')
+			->join('shop_order.customer', 'customer')
+			->where('customer.userUuid = :uuid')
 			->setParameter('uuid', $userUuid->getBytes())
 		;
 

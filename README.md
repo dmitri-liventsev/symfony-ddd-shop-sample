@@ -65,3 +65,7 @@ $ curl -X GET http://127.0.0.1:8000/api/products/{_PAGE_}
 
 ###Purchase a product(book)
 $ curl -d "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase
+
+
+###Get purchase history
+$ curl -X GET http://127.0.0.1:8000/api/orders/{_USER_UUID_}/{_PAGE_}

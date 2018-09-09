@@ -16,7 +16,7 @@ class OrderQueryController extends QueryController {
 
 	/**
 	 * @Route(
-	 *     "/orders/{page}",
+	 *     "/orders/{user_uuid}/{page}",
 	 *     name="orders_get",
 	 *     methods={"GET"}
 	 * )
@@ -24,8 +24,8 @@ class OrderQueryController extends QueryController {
 	 * @throws \Assert\AssertionFailedException
 	 */
 	public function getAll(Request $request) {
-		$page = $request->get('page', 0);
 		$userUuid = $request->get('user_uuid');
+		$page = (int) $request->get('page', 0);
 
 		Assertion::notNull($userUuid, "Uuid can\'t be null");
 		Assertion::integer($page, "Page should be a number");
