@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-	<entity name="App\Infrastructure\Order\Entity\Order" table="order">
+	<entity name="App\Infrastructure\Order\Entity\Order" table="shop_order">
 		<id name="uuid" type="uuid_binary" column="uuid"/>
 		<one-to-one field="orderItem" target-entity="OrderItem">
 			<cascade>

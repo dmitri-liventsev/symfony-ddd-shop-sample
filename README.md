@@ -64,4 +64,4 @@ $ curl -X DELETE http://localhost:8000/api/user/{_USER_UUID_}
 $ curl -X GET http://127.0.0.1:8000/api/products/{_PAGE_}
 
 ###Purchase a product(book)
-curl "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase -d
+$ curl -d "user_uuid={_USER_UUID_}&product_uuid={_PRODUCT_UUID_}&amount={_AMOUNT_}" -X POST http://127.0.0.1:8000/api/purchase
