@@ -46,7 +46,7 @@ class User  extends EventSourcedAggregateRoot{
 
     protected function applyUserWasRemoved(UserWasRemoved $event): void
     {
-        $this->uuid = $event->uuid;
+	    $this->uuid = $event->uuid;
     }
 
     private function setEmail(Email $email): void

@@ -31,7 +31,7 @@ class UserEventConsumer extends Projector {
 	}
 
 	/**
-	 * @throws \Assert\AssertionFailedException
+	 * @param UserWasRemoved $userWasRemoved
 	 */
 	protected function applyUserWasRemoved(UserWasRemoved $userWasRemoved): void
 	{

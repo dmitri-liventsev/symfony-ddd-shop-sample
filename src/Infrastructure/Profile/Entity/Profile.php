@@ -35,7 +35,7 @@ class Profile implements ProfileViewInterface{
 	 */
 	public function __construct(UuidInterface $uuid, UuidInterface $userUuid, Address $address, Contact $contact) {
 		$this->uuid    = $uuid;
-		$this->userUuid    = $userUuid;
+		$this->userUuid = $userUuid;
 		$this->address = $address;
 		$this->contact = $contact;
 	}

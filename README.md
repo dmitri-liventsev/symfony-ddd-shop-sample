@@ -50,3 +50,12 @@ $ php ./bin/console app:create-user email@email.ru password
 
 Create new product
 $ php ./bin/console app:create-product NAME {product_on_stock} {price}
+
+## Endpoints:
+
+###Create new user
+$ curl -d "email=email@gmail.com&password=password" -X POST http://localhost:8000/api/users
+
+###Remove user
+
+$ curl -X DELETE http://localhost:8000/api/user/de66ef74-e8a2-49f1-bf15-4e938ccbbfaf
