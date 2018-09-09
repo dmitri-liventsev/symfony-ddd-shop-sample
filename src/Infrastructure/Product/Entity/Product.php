@@ -8,11 +8,12 @@ namespace App\Infrastructure\Product\Entity;
 use App\Domain\Product\Projection\ProductViewInterface;
 use App\Infrastructure\Product\Exception\NumberOnStockIsLessThanZero;
 use Broadway\Serializer\Serializable;
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 
-class Product implements ProductViewInterface {
+class Product implements ProductViewInterface, JsonSerializable {
 
 	/** @var  UuidInterface */
 	private $uuid;
@@ -55,6 +56,16 @@ class Product implements ProductViewInterface {
 		return new self($data["uuid"], $data["name"], $productOnStock, $data["type"], $data["price"]);
 	}
 
+	public function serialize() {
+		return [
+			'uuid' => $this->getUuid()->toString(),
+			'name' => $this->name,
+			'product_on_stock' => $this->productsOnStock,
+			'type' => $this->productType,
+			'price' => $this->price,
+		];
+	}
+
 	public function getUuid(): UuidInterface {
 		return $this->uuid;
 	}
@@ -64,5 +75,16 @@ class Product implements ProductViewInterface {
 		if ($this->productsOnStock < 0) {
 			throw new NumberOnStockIsLessThanZero();
 		}
+	}
+
+	/**
+	 * Specify data which should be serialized to JSON
+	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+	 * @return mixed data which can be serialized by <b>json_encode</b>,
+	 * which is a value of any type other than a resource.
+	 * @since 5.4.0
+	 */
+	function jsonSerialize() {
+		return $this->serialize();
 	}
 }

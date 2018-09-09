@@ -23,7 +23,7 @@ class ProductModelRepository extends MysqlRepository implements ProductModelRepo
 	public function findAllAvailableProducts() {
 		$qb = $this->repository
 			->createQueryBuilder('product')
-			->where('product.products_on_stock > :minValue')
+			->where('product.productsOnStock > :minValue')
 			->setParameter('minValue', 0)
 		;
 

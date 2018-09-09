@@ -24,7 +24,7 @@ class ProductQueryController extends QueryController{
 	 * @throws \Assert\AssertionFailedException
 	 */
 	public function getAll(Request $request) {
-		$page = $request->get('page', 0);
+		$page = (int) $request->get('page', 0);
 
 		Assertion::integer($page, "Page should be a number");
 
