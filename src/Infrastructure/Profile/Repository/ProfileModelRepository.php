@@ -6,6 +6,7 @@ use App\Domain\Profile\Projection\ProfileViewInterface;
 use App\Infrastructure\Common\Repository\MysqlRepository;
 use App\Infrastructure\Profile\Entity\Profile;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
@@ -36,5 +37,20 @@ class ProfileModelRepository extends MysqlRepository implements ProfileModelRepo
 
 	public function add(ProfileViewInterface $profile) {
 		$this->register($profile);
+	}
+
+	/**
+	 * @throws \App\Domain\Common\Repository\Exception\NotFoundException
+	 * @throws \Doctrine\ORM\NonUniqueResultException
+	 */
+	public function oneByUuid(UuidInterface $uuid): ProfileViewInterface
+	{
+		$qb = $this->repository
+			->createQueryBuilder('profile')
+			->where('profile.uuid = :uuid')
+			->setParameter('uuid', $uuid->getBytes())
+		;
+
+		return $this->oneOrException($qb);
 	}
 }

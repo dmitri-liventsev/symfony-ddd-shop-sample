@@ -16,14 +16,17 @@ class Profile extends EventSourcedAggregateRoot {
 	/** @var UuidInterface */
 	private $uuid;
 
+	/** @var UuidInterface */
+	private $userUuid;
+
 	/** @var Address */
 	private $address;
 
 	/** @var Contact */
 	private $contact;
 
-	public function change(Address $address, Contact $contact) {
-		$this->apply(new ProfileWasUpdated($this->uuid, $address, $contact));
+	public function change(UuidInterface $userUuid, Address $address, Contact $contact) {
+		$this->apply(new ProfileWasUpdated($this->uuid, $userUuid, $address, $contact));
 	}
 
 	protected function applyProfileWasUpdated(ProfileWasUpdated $event) {

@@ -13,6 +13,8 @@ use Ramsey\Uuid\UuidInterface;
 class ProfileWasUpdated implements Serializable{
 	/** @var UuidInterface  */
 	public $uuid;
+	/** @var UuidInterface  */
+	public $userUuid;
 	/** @var Address  */
 	public $address;
 	/** @var Contact  */
@@ -21,14 +23,16 @@ class ProfileWasUpdated implements Serializable{
 	/**
 	 * ProfileWasUpdated constructor.
 	 *
-	 * @param $uuid
-	 * @param $address
-	 * @param $contact
+	 * @param UuidInterface $uuid
+	 * @param UuidInterface $userUuid
+	 * @param Address       $address
+	 * @param Contact       $contact
 	 */
-	public function __construct(UuidInterface $uuid, Address $address, Contact $contact) {
+	public function __construct(UuidInterface $uuid, UuidInterface $userUuid, Address $address, Contact $contact) {
 		$this->uuid    = $uuid;
 		$this->address = $address;
 		$this->contact = $contact;
+		$this->userUuid = $userUuid;
 	}
 
 
@@ -38,6 +42,7 @@ class ProfileWasUpdated implements Serializable{
 	public static function deserialize(array $data) {
 		return new self(
 			Uuid::fromString($data['uuid']),
+			Uuid::fromString($data['user_uuid']),
 			new Address($data['address']['city'], $data['address']['street'], $data['address']['house_number']),
 			new Contact($data['email'], $data['phone'])
 		);
@@ -49,10 +54,11 @@ class ProfileWasUpdated implements Serializable{
 	public function serialize(): array {
 		return [
 			'uuid' => $this->uuid->toString(),
+			'user_uuid' => $this->userUuid->toString(),
 		    'address' => [
 		        'city' => $this->address->city,
 		        'street' => $this->address->street,
-		        'house_number' => $this->address->house_number,
+		        'house_number' => $this->address->houseNumber,
 		    ],
 		    'contact' => [
 		    	'email' => $this->contact->email,

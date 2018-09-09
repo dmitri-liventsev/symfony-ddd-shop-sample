@@ -92,4 +92,60 @@ class Profile implements ProfileViewInterface{
 	{
 		return (string) $this->uuid;
 	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @param UuidInterface $uuid
+	 */
+	public function setUuid(UuidInterface $uuid) {
+		$this->uuid = $uuid;
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUserUuid(): UuidInterface {
+		return $this->userUuid;
+	}
+
+	/**
+	 * @param UuidInterface $userUuid
+	 */
+	public function setUserUuid(UuidInterface $userUuid) {
+		$this->userUuid = $userUuid;
+	}
+
+	/**
+	 * @return Address
+	 */
+	public function getAddress(): Address {
+		return $this->address;
+	}
+
+	/**
+	 * @param Address $address
+	 */
+	public function setAddress(Address $address) : void {
+		$this->address = $address;
+	}
+
+	/**
+	 * @return Contact
+	 */
+	public function getContact(): Contact {
+		return $this->contact;
+	}
+
+	/**
+	 * @param Contact $contact
+	 */
+	public function setContact(Contact $contact) : void {
+		$this->contact = $contact;
+	}
 }

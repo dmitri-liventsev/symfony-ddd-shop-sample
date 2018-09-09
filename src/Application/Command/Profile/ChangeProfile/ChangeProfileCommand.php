@@ -12,8 +12,9 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class ChangeProfileCommand {
+
 	/** @var  UuidInterface */
-	public $uuid;
+	public $userUuid;
 
 	/** @var  Address */
 	public $address;
@@ -28,8 +29,8 @@ class ChangeProfileCommand {
 	 * @param Address       $address
 	 * @param Contact       $contact
 	 */
-	public function __construct(string $uuid, Address $address, Contact $contact) {
-		$this->uuid    = Uuid::fromString($uuid);
+	public function __construct(string $userUuid, Address $address, Contact $contact) {
+		$this->userUuid    = Uuid::fromString($userUuid);
 		$this->address = $address;
 		$this->contact = $contact;
 	}
