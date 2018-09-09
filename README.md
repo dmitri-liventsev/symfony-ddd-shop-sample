@@ -12,16 +12,13 @@ Main patterns: DDD, CQRS, Event Sourcing
 Booth Symfony bundles was spotted from https://github.com/jorge07/symfony-4-es-cqrs-boilerplate one of the best skeleton 
 for DDD which i have ever seen. In real project i will just  fork it, but to study i will implement it self.
 
-
 ### Domain layer
 
 The domain layer will be divided to next domains: 
-- **User** SignUp, SignUp, Unregister, Authorization, Inentification
-- **Product** Keep information of available products and them types(Book is one of the type) on the store, and reduce/increase that amount
-- **Order** The "heart" of the project, here should initialize main events what should initialize "Purchase" and "Delivery" proccess, here it is necessary implement own Customer entity, what should stay even at user will be removed.
+- **User** SignUp, SignIn, Unregister, Authorization, Inentification
+- **Product** Keep information of available products and them types(Book is one of the type) on the storage, and reduce/increase that amount
+- **Order** The "heart" of the project, here should initialize main events what should initialize "Purchase" and "Delivery" processes, here it is necessary to implement own Customer entity and OrderItem entity, what should stay even at user or product will be removed.
 - **Profile**  Just profile information, update and remove it when user unregister self, or ask it by GDPR reason
-
-
 
 ## Local app setup
 1. `$ git clone`
@@ -42,8 +39,7 @@ The domain layer will be divided to next domains:
 	- php ./bin/console s:r
 	
 	**NB!** Do not use that solution on live servers. You have to setup normal web server. Ngix or Apache
-	
-	
+
 # CLI commands:
 Create new user
 `$ php ./bin/console app:create-user email@email.ru password`
@@ -72,7 +68,5 @@ Create new product
 
 #### Update profile
 `$ curl -X PUT http://127.0.0.1:8000/api/profile/{_USER_UUID_} -d "address_city=City&address_street=Street&address_house_number=1&contact_email=email@email.ru&contact_phone=123123"`
-
-
 
 The goal seems unattainable until it is achieved
