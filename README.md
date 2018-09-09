@@ -39,6 +39,6 @@ The domain layer will be divided to next domains:
 	
 	**NB!** Do not use that solution on live servers. Only migrations is available there!
 5. Run serve
-	- php ./bin/console r:s
+	- php ./bin/console s:r
 	
 	**NB!** Do not use that solution on live servers. You have to setup normal web server. Ngix or Apache
