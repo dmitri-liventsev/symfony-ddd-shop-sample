@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domain\User\Query\Repository;
+namespace App\Domain\User\Repository;
 
-use App\Domain\User\Projections\UserViewInterface;
+use App\Domain\User\Projection\UserViewInterface;
 use App\Domain\User\ValueObject\Email;
 use Ramsey\Uuid\UuidInterface;
 
-interface UserReadModelRepositoryInterface
+interface UserModelRepositoryInterface
 {
     public function oneByUuid(UuidInterface $uuid): UserViewInterface;
 
@@ -14,7 +14,7 @@ interface UserReadModelRepositoryInterface
 
     public function add(UserViewInterface $userRead): void;
 
-    public function remove(UserViewInterface $userRead): void;
+    public function remove($userRead): void;
 
     public function apply(): void;
 }

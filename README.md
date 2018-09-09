@@ -20,3 +20,11 @@ The domain layer will be divided to next domains:
 - **Product** Keep information of available products and them types(Book is one of the type) on the store, and reduce/increase that amount
 - **Order** The "heart" of the project, here should initialize main events what should initialize "Purchase" and "Delivery" proccess, here it is necessary implement own Customer entity, what should stay even at user will be removed.
 - **Profile**  Just profile information, update and remove it when user unregister self, or ask it by GDPR reason
+
+
+
+git clone
+composer install
+php ./bin/console d:d:c
+php ./bin/console d:s:c
+php ./bin/console d:m:e --up 20180908190647

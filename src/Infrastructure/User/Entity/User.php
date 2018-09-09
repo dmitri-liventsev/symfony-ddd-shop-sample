@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Entity;
 
-use App\Domain\User\Projections\UserViewInterface;
+use App\Domain\User\Projection\UserViewInterface;
 use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Auth\HashedPassword;
 use App\Domain\User\ValueObject\Email;
