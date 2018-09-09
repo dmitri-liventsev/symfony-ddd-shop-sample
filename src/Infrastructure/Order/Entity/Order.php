@@ -6,13 +6,14 @@ use App\Domain\Order\Projection\OrderItemViewInterface;
 use App\Domain\Order\Projection\OrderViewInterface;
 use App\Infrastructure\Product\Entity\Product;
 use Broadway\Serializer\Serializable;
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
-class Order implements OrderViewInterface {
+class Order implements OrderViewInterface, JsonSerializable {
 	/** @var UuidInterface  */
 	private $uuid;
 
@@ -51,7 +52,26 @@ class Order implements OrderViewInterface {
 		return new self($orderItem, $customer, $data["order_uuid"]);
 	}
 
+	public function serialize() : array {
+		return [
+			'uuid' => $this->uuid,
+			'order_item' => $this->orderItem->serialize(),
+			'customer' => $this->customer->serialize(),
+		];
+	}
+
 	public function getOrderItem(): OrderItemViewInterface {
 		return $this->orderItem;
+	}
+
+	/**
+	 * Specify data which should be serialized to JSON
+	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+	 * @return mixed data which can be serialized by <b>json_encode</b>,
+	 * which is a value of any type other than a resource.
+	 * @since 5.4.0
+	 */
+	function jsonSerialize() {
+		return $this->serialize();
 	}
 }

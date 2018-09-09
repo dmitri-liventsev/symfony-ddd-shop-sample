@@ -49,4 +49,26 @@ class OrderItem implements OrderItemViewInterface {
 	{
 		return new self($data["product_uuid"], $data["amount"], $data["uuid"]);
 	}
+
+	public function serialize() {
+		return [
+			'uuid' => $this->getUuid()->toString(),
+			'amount' => $this->getAmount(),
+			'product_uuid' => $this->getProductUuid()->toString(),
+		];
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @param UuidInterface $uuid
+	 */
+	public function setUuid(UuidInterface $uuid) {
+		$this->uuid = $uuid;
+	}
 }

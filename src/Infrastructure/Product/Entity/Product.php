@@ -56,7 +56,7 @@ class Product implements ProductViewInterface, JsonSerializable {
 		return new self($data["uuid"], $data["name"], $productOnStock, $data["type"], $data["price"]);
 	}
 
-	public function serialize() {
+	public function serialize() : array {
 		return [
 			'uuid' => $this->getUuid()->toString(),
 			'name' => $this->name,

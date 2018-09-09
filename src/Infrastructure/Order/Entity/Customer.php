@@ -46,6 +46,27 @@ class Customer implements CustomerViewInterface {
 	 */
 	public static function deserialize(array $data): self
 	{
-		return new self($data["uuid"], $data["customer_uuid"]);
+		return new self($data["uuid"], $data["user_uuid"]);
+	}
+
+	public function serialize() {
+		return [
+			'uuid' => $this->getUuid()->toString(),
+			'user_uuid' => $this->getUserUuid()->toString(),
+		];
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @param UuidInterface $uuid
+	 */
+	public function setUuid(UuidInterface $uuid) {
+		$this->uuid = $uuid;
 	}
 }
