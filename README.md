@@ -23,8 +23,22 @@ The domain layer will be divided to next domains:
 
 
 
-git clone
-composer install
-php ./bin/console d:d:c
-php ./bin/console d:s:c
-php ./bin/console d:m:e --up 20180908190647
+## Local app setup
+1. $ git clone
+2. $ composer install
+3. Setup DB in the .env file required ENV params:
+  - DATABASE_HOST=127.0.0.1
+  - DATABASE_PORT=3306
+  - DATABASE_NAME=ddd-shop
+  - DATABASE_USER=root
+  - DATABASE_PASS=Test1234
+4. Create database and tables
+	- php ./bin/console d:d:c
+	- php ./bin/console d:s:c
+	- php ./bin/console d:m:e --up 20180908190647
+	
+	**NB!** Do not use that solution on live servers. Only migrations is available there!
+5. Run serve
+	- php ./bin/console r:s
+	
+	**NB!** Do not use that solution on live servers. You have to setup normal web server. Ngix or Apache

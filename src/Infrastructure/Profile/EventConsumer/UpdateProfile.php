@@ -7,9 +7,6 @@ namespace App\Infrastructure\Profile\EventConsumer;
 
 use App\Domain\Profile\Event\ProfileWasUpdated;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
-use App\Domain\Profile\ValueObject\Address;
-use App\Domain\Profile\ValueObject\Contact;
-use App\Infrastructure\Profile\Entity\Profile;
 use Broadway\ReadModel\Projector;
 
 class UpdateProfile extends Projector {
