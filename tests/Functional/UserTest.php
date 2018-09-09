@@ -10,11 +10,8 @@ namespace App\Tests\Functional;
 
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
 use App\Domain\User\Repository\UserModelRepositoryInterface;
-use App\Infrastructure\Order\Entity\Customer;
 use App\Infrastructure\Order\Repository\CustomerModelRepository;
 use App\Infrastructure\Order\Repository\OrderModelRepository;
-use App\Infrastructure\Profile\Entity\Profile;
-use App\Infrastructure\User\Entity\User;
 use App\Tests\Functional\Fixtures\UserBuilder;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Client;
