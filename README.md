@@ -53,7 +53,7 @@ Create new product
 
 # Endpoints:
 
-## Create new user
+#### Create new user
 `$ curl -d "email=email@gmail.com&password=password" -X POST http://localhost:8000/api/users`
 
 #### Remove user
