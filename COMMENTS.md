@@ -19,10 +19,13 @@ ORM assumptions
   Order should contain worked statuses, and handle in async mode.
   Order could be canceled, it means at we should return OrderItem products to the Store
   
+Migrations.
+  On the live project should be realized migrations instead of using doctrine:schema:create command, but for dev its ok.
+  
 #Not realized requirements:
  - Logs
  - Tests
     - It just should be! But 8 hours limit not enough, to work in TDD mode.
-    
+ 
 My daughter, asked to help me, so here is her comment: ";it5l3jjjjjttt7r;2fm"
   
