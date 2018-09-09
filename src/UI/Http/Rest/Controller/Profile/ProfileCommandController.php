@@ -18,11 +18,10 @@ class ProfileCommandController extends CommandController {
 
 	/**
 	 * @Route(
-	 *     "/profile",
+	 *     "/profile/{user_uuid}",
 	 *     name="profile",
 	 *     methods={"PUT"},
 	 *     requirements={
-	 *      "user_uuid": "\d+",
 	 *      "address_city": "\w+",
 	 *      "address_street": "\w+",
 	 *      "address_house_number": "\w+",

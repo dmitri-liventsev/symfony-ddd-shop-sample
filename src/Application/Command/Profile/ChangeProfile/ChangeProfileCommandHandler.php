@@ -32,8 +32,8 @@ class ChangeProfileCommandHandler implements CommandHandlerInterface {
 	{
 		/** @var ProfileViewInterface $profileView */
 		$profileView = $this->profileRepository->oneByUserUuid($command->userUuid);
-
 		$profile = $this->profileStore->get($profileView->getUuid());
+
 		$profile->change($command->userUuid, $command->address, $command->contact);
 		$this->profileStore->store($profile);
 	}

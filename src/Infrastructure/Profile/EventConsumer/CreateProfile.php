@@ -5,17 +5,15 @@
 
 namespace App\Infrastructure\Profile\EventConsumer;
 
+
+use App\Domain\Profile\Event\ProfileWasCreated;
 use App\Domain\Profile\Factory\ProfileFactory;
-use App\Domain\Profile\Repository\ProfileStoreInterface;
-use App\Domain\Profile\ValueObject\Address;
-use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
-use App\Domain\User\Event\UserWasCreated;
+use App\Domain\Profile\Repository\ProfileStoreInterface;
 use App\Infrastructure\Profile\Entity\Profile;
 use Broadway\ReadModel\Projector;
-use Ramsey\Uuid\Uuid;
 
-class CreateProfileForNewUsers extends Projector {
+class CreateProfile extends Projector {
 
 	/** @var ProfileModelRepositoryInterface */
 	private $repository;
@@ -39,12 +37,9 @@ class CreateProfileForNewUsers extends Projector {
 		$this->profileStore = $profileStore;
 	}
 
-	protected function applyUserWasCreated(UserWasCreated $event) {
-		$uuid = Uuid::uuid4();
-		$address = new Address("", "", "");
-		$contact = new Contact("", "");
+	protected function applyProfileWasCreated(ProfileWasCreated $event) {
+		$userReadModel = Profile::fromSerializable($event);
 
-		$profileAgragator = $this->profileFactory->create($uuid, $event->uuid, $address, $contact);
-		$this->profileStore->store($profileAgragator);
+		$this->repository->add($userReadModel);
 	}
 }

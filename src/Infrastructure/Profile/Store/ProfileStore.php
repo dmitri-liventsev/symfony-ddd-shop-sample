@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\Profile\Store;
 
-
 use App\Domain\Profile\Profile;
 use App\Domain\Profile\Repository\ProfileStoreInterface;
 use Broadway\EventHandling\EventBus;
@@ -14,7 +13,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
-class ProfileStore extends EventSourcingRepository implements ProfileStoreInterface{
+class ProfileStore extends EventSourcingRepository implements ProfileStoreInterface {
     public function __construct(
         EventStore $eventStore,
         EventBus $eventBus,

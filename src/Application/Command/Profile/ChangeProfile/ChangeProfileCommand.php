@@ -25,9 +25,11 @@ class ChangeProfileCommand {
 	/**
 	 * ChangeProfileCommand constructor.
 	 *
-	 * @param string $uuid
-	 * @param Address       $address
-	 * @param Contact       $contact
+	 * @param string  $userUuid
+	 * @param Address $address
+	 * @param Contact $contact
+	 *
+	 * @internal param string $uuid
 	 */
 	public function __construct(string $userUuid, Address $address, Contact $contact) {
 		$this->userUuid    = Uuid::fromString($userUuid);

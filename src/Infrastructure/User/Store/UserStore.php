@@ -1,6 +1,7 @@
 <?php
 
-declare(strict_types=1);
+
+
 
 namespace App\Infrastructure\User\Store;
 
@@ -12,21 +13,7 @@ use Broadway\EventSourcing\EventSourcingRepository;
 use Broadway\EventStore\EventStore;
 use Ramsey\Uuid\UuidInterface;
 
-class UserStore extends EventSourcingRepository implements UserStoreInterface
-{
-	public function store(User $user): void
-	{
-		$this->save($user);
-	}
-
-	public function get(UuidInterface $uuid): User
-	{
-		/** @var User $user */
-		$user = $this->load((string) $uuid);
-
-		return $user;
-	}
-
+class UserStore extends EventSourcingRepository implements UserStoreInterface {
 	public function __construct(
 		EventStore $eventStore,
 		EventBus $eventBus,
@@ -39,5 +26,18 @@ class UserStore extends EventSourcingRepository implements UserStoreInterface
 			new PublicConstructorAggregateFactory(),
 			$eventStreamDecorators
 		);
+	}
+
+	public function store(User $user): void
+	{
+		$this->save($user);
+	}
+
+	public function get(UuidInterface $uuid): User
+	{
+		/** @var User $user */
+		$user = $this->load((string) $uuid);
+
+		return $user;
 	}
 }

@@ -6,6 +6,7 @@
 namespace App\Domain\Profile;
 
 
+use App\Domain\Profile\Event\ProfileWasCreated;
 use App\Domain\Profile\ValueObject\Address;
 use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Event\ProfileWasUpdated;
@@ -24,6 +25,22 @@ class Profile extends EventSourcedAggregateRoot {
 
 	/** @var Contact */
 	private $contact;
+
+	public static function create(UuidInterface $uuid, UuidInterface $userUuid, Address $address, Contact $contact) {
+		$profile = new self();
+
+		$profile->apply(new ProfileWasCreated($uuid, $userUuid, $address, $contact));
+
+		return $profile;
+	}
+
+	protected function applyProfileWasCreated(ProfileWasCreated $event): void
+	{
+		$this->uuid = $event->uuid;
+
+		$this->setAddress($event->address);
+		$this->setContact($event->contact);
+	}
 
 	public function change(UuidInterface $userUuid, Address $address, Contact $contact) {
 		$this->apply(new ProfileWasUpdated($this->uuid, $userUuid, $address, $contact));
