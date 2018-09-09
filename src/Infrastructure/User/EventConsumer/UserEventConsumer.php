@@ -10,7 +10,7 @@ use Broadway\ReadModel\Projector;
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
-class UserEventConsumer  extends Projector {
+class UserEventConsumer extends Projector {
 
 	/** @var UserModelRepositoryInterface */
 	private $repository;
@@ -39,6 +39,4 @@ class UserEventConsumer  extends Projector {
 
 		$this->repository->remove($userReadModel);
 	}
-
-
 }

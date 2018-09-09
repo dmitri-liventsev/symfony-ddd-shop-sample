@@ -4,6 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 	<entity name="App\Infrastructure\Product\Entity\Product" table="product">
 		<id name="uuid" type="uuid_binary" column="uuid"/>
+		<field name="name" type="string" column="name"/>
 		<field name="productsOnStock" type="integer" column="product_on_stock"/>
 		<field name="price" type="integer" column="price"/>
 		<field name="productType" type="string" length="50" column="product_type"/>

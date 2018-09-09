@@ -19,6 +19,8 @@ class ProductWasCreated implements Serializable {
 	public $type;
 	/** @var  int */
 	public $price;
+	/** @var  int */
+	public $productOnStock;
 
 	/**
 	 * ProductWasCreated constructor.
@@ -27,11 +29,12 @@ class ProductWasCreated implements Serializable {
 	 * @param $name
 	 * @param $type
 	 */
-	public function __construct(UuidInterface $uuid, $name, $type, $price) {
-		$this->uuid = $uuid;
-		$this->name = $name;
-		$this->type = $type;
-		$this->price = $price;
+	public function __construct(UuidInterface $uuid, $name, $productOnStock, $type, $price) {
+		$this->uuid           = $uuid;
+		$this->name           = $name;
+		$this->productOnStock = $productOnStock;
+		$this->type           = $type;
+		$this->price          = $price;
 	}
 
 	/**
@@ -41,6 +44,7 @@ class ProductWasCreated implements Serializable {
 		return new self(
 			Uuid::fromString($data['uuid']),
 			$data['name'],
+			$data['product_on_stock'],
 			$data['type'],
 			$data['price']
 		);
@@ -53,6 +57,7 @@ class ProductWasCreated implements Serializable {
 		return [
 			'uuid' => $this->uuid->toString(),
 			'name' => $this->name,
+			'product_on_stock' => $this->productOnStock,
 			'type' => $this->type,
 			'price' => $this->price,
 		];

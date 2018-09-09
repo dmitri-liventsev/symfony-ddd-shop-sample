@@ -4,11 +4,12 @@ namespace App\Infrastructure\Product\EventConsumer;
 
 use App\Domain\Order\Event\OrderWasCreated;
 use App\Domain\Product\Repository\ProductModelRepositoryInterface;
+use Broadway\ReadModel\Projector;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */
-class ReduceNumberOfProductsConsumer {
+class ReduceNumberOfProductsConsumer extends Projector {
 
 	/** @var ProductModelRepositoryInterface */
 	private $repository;

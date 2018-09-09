@@ -49,4 +49,4 @@ Create new user
 $ php ./bin/console app:create-user email@email.ru password
 
 Create new product
-$ php ./bin/console app:create-product email@email.ru password
+$ php ./bin/console app:create-product NAME {product_on_stock} {price}

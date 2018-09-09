@@ -18,6 +18,7 @@ ORM assumptions
   Order should contain collection of OrderItems.
   Order should contain worked statuses, and handle in async mode.
   Order could be canceled, it means at we should return OrderItem products to the Store
+  Entity timestamps (updated_at, created_at)
   
 Migrations.
   On the live project should be realized migrations instead of using doctrine:schema:create command, but for dev its ok.

@@ -7,14 +7,18 @@ namespace App\Infrastructure\Product\Entity;
 
 use App\Domain\Product\Projection\ProductViewInterface;
 use App\Infrastructure\Product\Exception\NumberOnStockIsLessThanZero;
+use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Serializable;
+
 
 class Product implements ProductViewInterface {
 
 	/** @var  UuidInterface */
 	private $uuid;
+
+	/** @var  string */
+	private $name;
 
 	/** @var int */
 	private $productsOnStock;
@@ -33,8 +37,9 @@ class Product implements ProductViewInterface {
 	 * @param $productType
 	 * @param $price
 	 */
-	public function __construct($uuid, $productsOnStock, $productType, $price) {
+	public function __construct($uuid, $name, $productsOnStock, $productType, $price) {
 		$this->uuid = is_string($uuid) ? Uuid::fromString($uuid) : $uuid;
+		$this->name = $name;
 		$this->productsOnStock = $productsOnStock;
 		$this->productType = $productType;
 		$this->price = $price;
@@ -46,7 +51,8 @@ class Product implements ProductViewInterface {
 	}
 
 	public static function deserialize($data) {
-		return new self($data["uuid"], $data["products_on_stock"], $data["product_type"], $data["price"]);
+		$productOnStock = $data["product_on_stock"] ?? 0;
+		return new self($data["uuid"], $data["name"], $productOnStock, $data["type"], $data["price"]);
 	}
 
 	public function getUuid(): UuidInterface {

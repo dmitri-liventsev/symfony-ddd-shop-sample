@@ -13,19 +13,22 @@ class CreateProductCommand {
 	public $name;
 	public $type;
 	public $price;
+	public $productOnStock;
 
 	/**
 	 * CreateProductCommandHandler constructor.
 	 *
 	 * @param string $uuid
 	 * @param        $name
+	 * @param        $productOnStock
 	 * @param        $type
 	 * @param        $price
 	 */
-	public function __construct(string $uuid, $name, $type, $price) {
+	public function __construct(string $uuid, $name, $productOnStock, $type, $price) {
 		$this->uuid = Uuid::fromString($uuid);
 		$this->name = $name;
 		$this->type = $type;
 		$this->price = $price;
+		$this->productOnStock = $productOnStock;
 	}
 }

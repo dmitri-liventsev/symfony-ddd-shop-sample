@@ -31,6 +31,7 @@ class CreateProductCliCommand extends Command {
 			->setName('app:create-product')
 			->setDescription('Given a uuid, name and type, generates a new product.')
 			->addArgument('name', InputArgument::REQUIRED, 'Product name')
+			->addArgument('product_on_stock', InputArgument::REQUIRED, 'Product on stock')
 			->addArgument('price', InputArgument::OPTIONAL, 'Price')
 			->addArgument('type', InputArgument::OPTIONAL, 'Product type')
 			->addArgument('uuid', InputArgument::OPTIONAL, 'Product Uuid')
@@ -46,8 +47,9 @@ class CreateProductCliCommand extends Command {
 		$command = new CreateProductCommand(
 			$uuid = ($input->getArgument('uuid') ?: Uuid::uuid4()->toString()),
 			$name = $input->getArgument('name'),
-			$price = $input->getArgument('price')?: 0,
-			$type = $input->getArgument('type')?: 'Book'
+			$amount = $input->getArgument('product_on_stock'),
+			$type = $input->getArgument('type')?: 'Book',
+			$price = $input->getArgument('price')?: 0
 		);
 
 		$this->commandBus->handle($command);
@@ -57,5 +59,6 @@ class CreateProductCliCommand extends Command {
 		$output->writeln("Uuid: $uuid");
 		$output->writeln("Name: $name");
 		$output->writeln("Type: $type");
+		$output->writeln("Amount: $amount");
 	}
 }
