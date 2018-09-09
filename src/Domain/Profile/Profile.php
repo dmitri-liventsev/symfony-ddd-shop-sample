@@ -16,8 +16,21 @@ class Profile extends EventSourcedAggregateRoot {
 	/** @var UuidInterface */
 	private $uuid;
 
+	/** @var Address */
+	private $address;
+
+	/** @var Contact */
+	private $contact;
+
 	public function change(Address $address, Contact $contact) {
 		$this->apply(new ProfileWasUpdated($this->uuid, $address, $contact));
+	}
+
+	protected function applyProfileWasUpdated(ProfileWasUpdated $event) {
+		$this->uuid = $event->uuid;
+
+		$this->setAddress($event->address);
+		$this->setContact($event->contact);
 	}
 
 	/**
@@ -27,4 +40,41 @@ class Profile extends EventSourcedAggregateRoot {
 	{
 		return $this->uuid->toString();
 	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @return Address
+	 */
+	public function getAddress(): Address {
+		return $this->address;
+	}
+
+	/**
+	 * @param Address $address
+	 */
+	public function setAddress(Address $address) {
+		$this->address = $address;
+	}
+
+	/**
+	 * @return Contact
+	 */
+	public function getContact(): Contact {
+		return $this->contact;
+	}
+
+	/**
+	 * @param Contact $contact
+	 */
+	public function setContact(Contact $contact) {
+		$this->contact = $contact;
+	}
+
+
 }

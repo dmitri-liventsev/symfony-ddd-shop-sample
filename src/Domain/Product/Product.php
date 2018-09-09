@@ -17,6 +17,8 @@ class Product extends EventSourcedAggregateRoot {
 	private $name;
 	/** @var  string */
 	private $type;
+	/** @var  int */
+	private $price;
 
 	/**
 	 * @return string
@@ -29,5 +31,70 @@ class Product extends EventSourcedAggregateRoot {
 	public static function create(UuidInterface $uuid, $name, $type, $price) : self {
 		$order = new self();
 		$order->apply(new ProductWasCreated($uuid, $name, $type, $price));
+	}
+
+	protected function applyProductWasCreated(ProductWasCreated $event): void
+	{
+		$this->uuid = $event->uuid;
+
+		$this->setName($event->name);
+		$this->setType($event->type);
+		$this->setPrice($event->price);
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface {
+		return $this->uuid;
+	}
+
+	/**
+	 * @param UuidInterface $uuid
+	 */
+	public function setUuid(UuidInterface $uuid) {
+		$this->uuid = $uuid;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName(): string {
+		return $this->name;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function setName(string $name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType(): string {
+		return $this->type;
+	}
+
+	/**
+	 * @param string $type
+	 */
+	public function setType(string $type) {
+		$this->type = $type;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPrice(): int {
+		return $this->price;
+	}
+
+	/**
+	 * @param int $price
+	 */
+	public function setPrice(int $price) {
+		$this->price = $price;
 	}
 }

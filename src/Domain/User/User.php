@@ -44,6 +44,11 @@ class User  extends EventSourcedAggregateRoot{
         $this->setHashedPassword($event->credentials->password);
     }
 
+    protected function applyUserWasRemoved(UserWasRemoved $event): void
+    {
+        $this->uuid = $event->uuid;
+    }
+
     private function setEmail(Email $email): void
     {
         $this->email = $email;
