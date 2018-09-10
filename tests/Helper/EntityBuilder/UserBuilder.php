@@ -6,8 +6,7 @@
  * Time: 22:15
  */
 
-namespace App\Tests\Functional\Fixtures;
-
+namespace App\Tests\Helper\EntityBuilder;
 use App\Infrastructure\User\Entity\User;
 use App\Tests\Helper\Randomize;
 use Doctrine\Common\Persistence\ObjectManager;

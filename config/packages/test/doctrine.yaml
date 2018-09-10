@@ -8,11 +8,11 @@ parameters:
 doctrine:
     dbal:
         driver:   pdo_mysql
-        host:     "%env(DATABASE_HOST)%"
-        port:     "%env(DATABASE_PORT)%"
-        dbname:   "%env(DATABASE_NAME)%"
-        user:     "%env(DATABASE_USER)%"
-        password: "%env(DATABASE_PASS)%"
+        host:     "127.0.0.1"
+        port:     "3306"
+        dbname:   "ddd-shop"
+        user:     "root"
+        password: ""
         charset:  UTF8
         server_version: '5.7'
         types:

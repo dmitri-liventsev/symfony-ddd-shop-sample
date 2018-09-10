@@ -6,11 +6,13 @@
  * Time: 21:49
  */
 
-namespace App\Tests\Functional;
+namespace App\Tests\UI\Http\Rest\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class OrderTest extends WebTestCase
 {
-
+    public function testCanBeGetListOfOrders() {
+        $this->assertEquals(1,1);
+    }
 }
