@@ -31,9 +31,6 @@ class OrderTest extends JsonWebTest
     /** @var UserModelRepositoryInterface */
     private $userRepository;
 
-    /** @var ProfileModelRepositoryInterface */
-    private $profileRepository;
-
     /** @var OrderModelRepositoryInterface */
     private $orderRepository;
 
