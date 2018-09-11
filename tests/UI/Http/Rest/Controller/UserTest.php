@@ -100,6 +100,8 @@ class UserTest extends WebTestCase
     }
 
     public function testOnUserRemoveAllOrderCustomerShouldStay() {
+    	//TODO implement it!
+
         $this->assertEquals(1,1);
     }
 
