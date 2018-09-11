@@ -73,3 +73,7 @@ services:
     App\UI\Http\Rest\EventSubscriber\JsonBodyParserSubscriber:
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest', priority: 100 }
+
+# Fixtures services
+    App\Tests\DataFixtures\VoidFixture:
+        tags: [doctrine.fixture.orm]

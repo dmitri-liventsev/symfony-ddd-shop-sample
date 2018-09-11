@@ -18,12 +18,13 @@ use App\Infrastructure\User\Entity\User;
 use App\Tests\Helper\Command;
 use App\Tests\Helper\EntityBuilder\ProfileBuilder;
 use App\Tests\Helper\EntityBuilder\UserBuilder;
+use App\Tests\UI\Http\Rest\JsonWebTest;
 use Doctrine\ORM\EntityManager;
 
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserTest extends WebTestCase
+class UserTest extends JsonWebTest
 {
     /** @var EntityManager */
     private $em;
@@ -35,12 +36,14 @@ class UserTest extends WebTestCase
     private $profileRepository;
 
     public function setUp() {
+    	parent::setUp();
+
         $client = static::createClient();
-        $container = $client->getContainer();
-        $doctrine = $container->get('doctrine');
+
+        $doctrine = self::$container->get('doctrine');
         $this->em = $doctrine->getManager();
-        $this->userRepository = $container->get('doctrine')->getRepository(User::class);
-        $this->profileRepository = $container->get('doctrine')->getRepository(Profile::class);
+        $this->userRepository = self::$container->get('doctrine')->getRepository(User::class);
+        $this->profileRepository = self::$container->get('doctrine')->getRepository(Profile::class);
     }
 
     /**
