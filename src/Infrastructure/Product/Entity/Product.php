@@ -77,6 +77,70 @@ class Product implements ProductViewInterface, JsonSerializable {
 		}
 	}
 
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductsOnStock(): int
+    {
+        return $this->productsOnStock;
+    }
+
+    /**
+     * @param int $productsOnStock
+     */
+    public function setProductsOnStock(int $productsOnStock): void
+    {
+        $this->productsOnStock = $productsOnStock;
+    }
+
+    /**
+     * @return String
+     */
+    public function getProductType(): String
+    {
+        return $this->productType;
+    }
+
+    /**
+     * @param String $productType
+     */
+    public function setProductType(String $productType): void
+    {
+        $this->productType = $productType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param int $price
+     */
+    public function setPrice(int $price): void
+    {
+        $this->price = $price;
+    }
+
 	/**
 	 * Specify data which should be serialized to JSON
 	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php

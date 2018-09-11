@@ -8,21 +8,20 @@
 
 namespace App\Tests\UI\Http\Rest\Controller;
 
-use App\Application\Command\User\SignUp\SignUpCommand;
+use App\Domain\Order\Repository\OrderModelRepositoryInterface;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
 use App\Domain\User\Repository\UserModelRepositoryInterface;
-use App\Infrastructure\Order\Repository\CustomerModelRepository;
-use App\Infrastructure\Order\Repository\OrderModelRepository;
+use App\Infrastructure\Order\Entity\Order;
 use App\Infrastructure\Profile\Entity\Profile;
 use App\Infrastructure\User\Entity\User;
 use App\Tests\Helper\Command;
+use App\Tests\Helper\EntityBuilder\ProductBuilder;
 use App\Tests\Helper\EntityBuilder\ProfileBuilder;
 use App\Tests\Helper\EntityBuilder\UserBuilder;
 use App\Tests\UI\Http\Rest\JsonWebTest;
 use Doctrine\ORM\EntityManager;
+use Ramsey\Uuid\Uuid;
 
-use League\Tactician\CommandBus;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserTest extends JsonWebTest
 {
@@ -35,6 +34,9 @@ class UserTest extends JsonWebTest
     /** @var ProfileModelRepositoryInterface */
     private $profileRepository;
 
+    /** @var OrderModelRepositoryInterface */
+    private $orderRepository;
+
     public function setUp() {
     	parent::setUp();
 
@@ -44,6 +46,7 @@ class UserTest extends JsonWebTest
         $this->em = $doctrine->getManager();
         $this->userRepository = self::$container->get('doctrine')->getRepository(User::class);
         $this->profileRepository = self::$container->get('doctrine')->getRepository(Profile::class);
+        $this->orderRepository = self::$container->get('doctrine')->getRepository(Order::class);
     }
 
     /**
@@ -74,13 +77,16 @@ class UserTest extends JsonWebTest
         $this->assertNotNull($profile);
     }
 
+    /**
+     * @throws \Assert\AssertionFailedException
+     */
     public function testUserCanRemoveHimself() {
 	    $user = UserBuilder::random();
 	    $profile = ProfileBuilder::random($user);
 
 	    $client = static::createClient();
 	    Command::createUser($user, $client);
-	    $client->request('DELETE', '/api/user/' . $user->uuid());
+	    $client->request('DELETE', '/api/user/' . $user->uuid()->toString());
 
 	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -89,12 +95,15 @@ class UserTest extends JsonWebTest
         $this->assertNull($actualUser);
     }
 
+    /**
+     * @throws \Assert\AssertionFailedException
+     */
     public function testOnUserRemoveProfileShouldBeDeleted() {
 	    $user = UserBuilder::random();
 	    $client = static::createClient();
 
 	    Command::createUser($user, $client);
-	    $client->request('DELETE', '/api/user/' . $user->uuid());
+	    $client->request('DELETE', '/api/user/' . $user->uuid()->toString());
 
 	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -103,19 +112,23 @@ class UserTest extends JsonWebTest
 	    $this->assertNull($profile);
     }
 
+    /**
+     * @throws \Assert\AssertionFailedException
+     * @throws \Exception
+     */
     public function testOnUserRemoveAllOrderCustomerShouldStay() {
-    	//TODO implement it!
 	    $client = static::createClient();
 
 	    $user = UserBuilder::random();
+	    $product = ProductBuilder::random();
+	    $orderUuid = Uuid::uuid4();
 	    Command::createUser($user, $client);
+	    Command::createProduct($product, $client);
+        Command::purchaseProduct($orderUuid, $user, $product, 1, $client);
 
-	    //create product
-	    //create order
-	    //remove user
+        $client->request('DELETE', '/api/user/' . $user->uuid()->toString());
+        $actualOrder = $this->orderRepository->findOneByUuid($orderUuid);
 
-	    //check at order not null
-
-        $this->assertEquals(1,1);
+        $this->assertNotNull($actualOrder);
     }
 }
