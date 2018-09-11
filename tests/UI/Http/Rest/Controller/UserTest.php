@@ -15,6 +15,7 @@ use App\Infrastructure\Order\Repository\CustomerModelRepository;
 use App\Infrastructure\Order\Repository\OrderModelRepository;
 use App\Infrastructure\Profile\Entity\Profile;
 use App\Infrastructure\User\Entity\User;
+use App\Tests\Helper\Command;
 use App\Tests\Helper\EntityBuilder\ProfileBuilder;
 use App\Tests\Helper\EntityBuilder\UserBuilder;
 use Doctrine\ORM\EntityManager;
@@ -75,7 +76,7 @@ class UserTest extends WebTestCase
 	    $profile = ProfileBuilder::random($user);
 
 	    $client = static::createClient();
-	    $this->createUser($user, $client);
+	    Command::createUser($user, $client);
 	    $client->request('DELETE', '/api/user/' . $user->uuid());
 
 	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -89,7 +90,7 @@ class UserTest extends WebTestCase
 	    $user = UserBuilder::random();
 	    $client = static::createClient();
 
-	    $this->createUser($user, $client);
+	    Command::createUser($user, $client);
 	    $client->request('DELETE', '/api/user/' . $user->uuid());
 
 	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -104,21 +105,4 @@ class UserTest extends WebTestCase
 
         $this->assertEquals(1,1);
     }
-
-	/**
-	 * @throws \Assert\AssertionFailedException
-	 * @throws \Exception
-	 */
-	protected function createUser(User $user, $client): void
-	{
-		$signUp = new SignUpCommand(
-			$user->uuid()->toString(),
-			$user->email(),
-			$user->hashedPassword()
-		);
-
-		/** @var CommandBus $commandBus */
-		$commandBus = $client->getContainer()->get('tactician.commandbus.command');
-		$commandBus->handle($signUp);
-	}
 }
