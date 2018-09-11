@@ -28,4 +28,52 @@ class Address {
 		$this->street      = $street;
 		$this->houseNumber = $houseNumber;
 	}
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param string $street
+     */
+    public function setStreet(string $street): void
+    {
+        $this->street = $street;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHouseNumber(): string
+    {
+        return $this->houseNumber;
+    }
+
+    /**
+     * @param string $houseNumber
+     */
+    public function setHouseNumber(string $houseNumber): void
+    {
+        $this->houseNumber = $houseNumber;
+    }
 }
