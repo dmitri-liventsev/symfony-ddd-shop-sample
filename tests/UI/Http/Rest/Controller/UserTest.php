@@ -102,6 +102,16 @@ class UserTest extends WebTestCase
 
     public function testOnUserRemoveAllOrderCustomerShouldStay() {
     	//TODO implement it!
+	    $client = static::createClient();
+
+	    $user = UserBuilder::random();
+	    Command::createUser($user, $client);
+
+	    //create product
+	    //create order
+	    //remove user
+
+	    //check at order not null
 
         $this->assertEquals(1,1);
     }
