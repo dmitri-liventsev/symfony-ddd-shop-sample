@@ -41,8 +41,8 @@ class ProductModelRepository extends MysqlRepository implements ProductModelRepo
 	public function oneByUuid(UuidInterface $uuid): ProductViewInterface
 	{
 		$qb = $this->repository
-			->createQueryBuilder('user')
-			->where('user.uuid = :uuid')
+			->createQueryBuilder('product')
+			->where('product.uuid = :uuid')
 			->setParameter('uuid', $uuid->getBytes())
 		;
 

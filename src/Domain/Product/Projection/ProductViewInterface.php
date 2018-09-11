@@ -7,4 +7,5 @@ namespace App\Domain\Product\Projection;
  */
 interface ProductViewInterface {
 	public function reduceNumberOfProductsOnStock(int $amount): void;
+	public function getProductsOnStock() : int;
 }

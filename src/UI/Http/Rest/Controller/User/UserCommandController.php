@@ -26,6 +26,7 @@ final class UserCommandController extends CommandController
      * })
      *
      * @throws \Assert\AssertionFailedException
+     * @throws \Exception
      */
     public function signUp(Request $request): JsonResponse
     {

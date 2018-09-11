@@ -25,9 +25,6 @@ use Ramsey\Uuid\Uuid;
 
 class UserTest extends JsonWebTest
 {
-    /** @var EntityManager */
-    private $em;
-
     /** @var UserModelRepositoryInterface */
     private $userRepository;
 
@@ -40,13 +37,9 @@ class UserTest extends JsonWebTest
     public function setUp() {
     	parent::setUp();
 
-        $client = static::createClient();
-
-        $doctrine = self::$container->get('doctrine');
-        $this->em = $doctrine->getManager();
-        $this->userRepository = self::$container->get('doctrine')->getRepository(User::class);
-        $this->profileRepository = self::$container->get('doctrine')->getRepository(Profile::class);
-        $this->orderRepository = self::$container->get('doctrine')->getRepository(Order::class);
+        $this->userRepository = $this->doctrine->getRepository(User::class);
+        $this->profileRepository = $this->doctrine->getRepository(Profile::class);
+        $this->orderRepository = $this->doctrine->getRepository(Order::class);
     }
 
     /**

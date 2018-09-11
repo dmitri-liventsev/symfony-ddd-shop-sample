@@ -6,14 +6,13 @@
 namespace App\Tests\UI\Http\Rest;
 
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
-
 
 abstract class JsonWebTest extends WebTestCase {
 	/** @var  Application $application */
@@ -22,29 +21,35 @@ abstract class JsonWebTest extends WebTestCase {
 	/** @var  Client $client */
 	protected $client;
 
-//	/** @var  ContainerInterface $container */
-//	protected static  $container;
-
 	/** @var  EntityManager $entityManager */
-	protected $entityManager;
+    protected $entityManager;
 
-	public function setUp()
+    /** @var Registry */
+    protected $doctrine;
+
+    /**
+     * @throws \Exception
+     */
+    public function setUp()
 	{
-//		self::runCommand('doctrine:database:drop --force');
-//		self::runCommand('doctrine:database:create');
-//		self::runCommand('doctrine:schema:create');
-//		self::runCommand('d:m:m');
-		self::runCommand('doctrine:fixtures:load');
-//		self::runCommand('d:m:e --up 20180908190647');
+        $this->client = static::createClient();
+        $this->doctrine = self::$container->get('doctrine');
 
-		$this->client = static::createClient();
-//		$this->container = $this->client->getContainer();
-		$this->entityManager = self::$container->get('doctrine.orm.entity_manager');
 
-		parent::setUp();
+        $this->client = static::createClient();
+        $this->entityManager = self::$container->get('doctrine.orm.entity_manager');
+
+        self::runCommand('doctrine:fixtures:load');
+
+        parent::setUp();
 	}
 
-	protected static function runCommand($command)
+    /**
+     * @param $command
+     * @return int
+     * @throws \Exception
+     */
+    protected static function runCommand($command)
 	{
 		$command = sprintf('%s --quiet', $command);
 
@@ -72,5 +77,6 @@ abstract class JsonWebTest extends WebTestCase {
 
 		$this->entityManager->close();
 		$this->entityManager = null; // avoid memory leaks
+		$this->client = null; // avoid memory leaks
 	}
 }
