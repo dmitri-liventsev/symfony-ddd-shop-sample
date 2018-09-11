@@ -13,6 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class ProfileTest extends WebTestCase
 {
     public function testProfileCanBeChanged() {
+    	//Create user
+	    //Send update profile
+	    //Check profile details
+
         $this->assertEquals(1,1);
     }
 }
