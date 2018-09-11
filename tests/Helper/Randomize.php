@@ -24,4 +24,8 @@ class Randomize
     public static function email() {
         return self::string() . '@gmail.ru';
     }
+
+    public static function number($min = 1, $max = 100) {
+		return rand($min, $max);
+	}
 }

@@ -8,15 +8,18 @@
 
 namespace App\Tests\UI\Http\Rest\Controller;
 
+use App\Application\Command\User\SignUp\SignUpCommand;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
 use App\Domain\User\Repository\UserModelRepositoryInterface;
 use App\Infrastructure\Order\Repository\CustomerModelRepository;
 use App\Infrastructure\Order\Repository\OrderModelRepository;
 use App\Infrastructure\Profile\Entity\Profile;
 use App\Infrastructure\User\Entity\User;
+use App\Tests\Helper\EntityBuilder\ProfileBuilder;
 use App\Tests\Helper\EntityBuilder\UserBuilder;
 use Doctrine\ORM\EntityManager;
 
+use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserTest extends WebTestCase
@@ -36,7 +39,7 @@ class UserTest extends WebTestCase
         $doctrine = $container->get('doctrine');
         $this->em = $doctrine->getManager();
         $this->userRepository = $container->get('doctrine')->getRepository(User::class);
-        $this->profileRepositor = $container->get('doctrine')->getRepository(Profile::class);
+        $this->profileRepository = $container->get('doctrine')->getRepository(Profile::class);
     }
 
     /**
@@ -57,23 +60,63 @@ class UserTest extends WebTestCase
      * @throws \Assert\AssertionFailedException
      */
     public function testOnSignUpProfileShouldBeCreated() {
-//        $user = UserBuilder::random();
-//        $this->client->request('POST', '/api/users', $user->serialize());
-//
-//        $profile = $this->profileRepository->oneByUserUuid($user->uuid());
+        $user = UserBuilder::random();
 
-        $this->assertEquals(1,1);
+	    $client = static::createClient();
+	    $client->request('POST', '/api/users', ["email" => $user->email(), "password" => $user->hashedPassword(), "uuid" => $user->uuid()]);
+
+        $profile = $this->profileRepository->findOneByUserUuid($user->uuid());
+
+        $this->assertNotNull($profile);
     }
 
     public function testUserCanRemoveHimself() {
-        $this->assertEquals(1,1);
+	    $user = UserBuilder::random();
+	    $profile = ProfileBuilder::random($user);
+
+	    $client = static::createClient();
+	    $this->createUser($user, $client);
+	    $client->request('DELETE', '/api/user/' . $user->uuid());
+
+	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+	    /** @var User $actualUser */
+	    $actualUser = $this->userRepository->findOneByUuid($user->uuid());
+        $this->assertNull($actualUser);
     }
 
     public function testOnUserRemoveProfileShouldBeDeleted() {
-        $this->assertEquals(1,1);
+	    $user = UserBuilder::random();
+	    $client = static::createClient();
+
+	    $this->createUser($user, $client);
+	    $client->request('DELETE', '/api/user/' . $user->uuid());
+
+	    $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+	    /** @var User $actualUser */
+	    $profile = $this->profileRepository->findOneByUserUuid($user->uuid());
+	    $this->assertNull($profile);
     }
 
     public function testOnUserRemoveAllOrderCustomerShouldStay() {
         $this->assertEquals(1,1);
     }
+
+	/**
+	 * @throws \Assert\AssertionFailedException
+	 * @throws \Exception
+	 */
+	protected function createUser(User $user, $client): void
+	{
+		$signUp = new SignUpCommand(
+			$user->uuid()->toString(),
+			$user->email(),
+			$user->hashedPassword()
+		);
+
+		/** @var CommandBus $commandBus */
+		$commandBus = $client->getContainer()->get('tactician.commandbus.command');
+		$commandBus->handle($signUp);
+	}
 }
