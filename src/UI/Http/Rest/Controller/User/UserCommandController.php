@@ -26,10 +26,11 @@ final class UserCommandController extends CommandController
      * })
      *
      * @throws \Assert\AssertionFailedException
+     * @throws \Exception
      */
     public function signUp(Request $request): JsonResponse
     {
-        $uuid = $request->get('uuid', Uuid::uuid4()->toString());
+        $uuid = $request->get('uuid', Uuid::uuid4());
         $email = $request->get('email');
         $plainPassword = $request->get('password');
 
@@ -37,7 +38,7 @@ final class UserCommandController extends CommandController
         Assertion::notNull($email, "Email can\'t be null");
         Assertion::notNull($plainPassword, "Password can\'t be null");
 
-        $commandRequest = new SignUpCommand($uuid, $email, $plainPassword);
+        $commandRequest = new SignUpCommand($uuid->toString(), $email, $plainPassword);
 
         $this->exec($commandRequest);
 

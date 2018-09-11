@@ -15,31 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderCommandController extends CommandController {
 
-	/**
-	 * @Route(
-	 *     "/purchase",
-	 *     name="purchase",
-	 *     methods={"POST"},
-	 *     requirements={
-	 *      "user_uuid": "\d+",
-	 *      "product_uuid": "\d+",
-	 *      "amount": "\d+"
-	 * })
-	 *
-	 * @throws \Assert\AssertionFailedException
-	 */
+    /**
+     * @Route(
+     *     "/purchase",
+     *     name="purchase",
+     *     methods={"POST"},
+     *     requirements={
+     *      "user_uuid": "\d+",
+     *      "product_uuid": "\d+",
+     *      "amount": "\d+"
+     * })
+     *
+     * @throws \Assert\AssertionFailedException
+     * @throws \Exception
+     */
 	public function purchase(Request $request) {
 		$userUuidString = $request->get('user_uuid');
 		$productUuidString = $request->get('product_uuid');
 		$amount = (int) $request->get('amount');
+        $uuid = $request->get('uuid', Uuid::uuid4());
 
-		Assertion::notNull($userUuidString, "Uuid can\'t be null");
-		Assertion::notNull($productUuidString, "Uuid can\'t be null");
-		Assertion::notNull($amount, "Uuid can\'t be null");
+		Assertion::notNull($userUuidString, "User uuid can\'t be null");
+		Assertion::notNull($productUuidString, "Product uuid can\'t be null");
+		Assertion::notNull($amount, "Amount can\'t be null");
 		Assertion::integer($amount, "Amount should be a number");
 
-
-		$uuid = Uuid::uuid1();
 		$userUuid = Uuid::fromString($userUuidString);
 		$productUuid = Uuid::fromString($productUuidString);
 
