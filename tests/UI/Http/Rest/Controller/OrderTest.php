@@ -25,7 +25,7 @@ class OrderTest extends WebTestCase
     	//Create user
 	    //Create product
 	    //Purchase products via API
-	    //Check orders number and orders !?!? Need to drop DB before using
+	    //Check orders number and orders
 
         $this->assertEquals(1,1);
     }
