@@ -10,17 +10,20 @@ Not implemented ObjectValues:
  - Profile.Contact.Email
  - Profile.Contact.Phone
   
-ORM assumptions
+ORM assumptions:
+
   Product type should be entity, not a string
   Foreign keys between Order_item - Product, Order_Customer - User was excluded, to avoid any cascade deletion. Orders should stay on the system
   
  Not implemented features:
+ 
   Order should contain collection of OrderItems.
   Order should contain worked statuses, and handle in async mode.
   Order could be canceled, it means at we should return OrderItem products to the Store
   Entity timestamps (updated_at, created_at)
   
-Migrations.
+Migrations:
+
   On the live project should be realized migrations instead of using doctrine:schema:create command, but for dev its ok.
   
 #Not realized requirements:
