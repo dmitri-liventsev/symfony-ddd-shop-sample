@@ -43,7 +43,7 @@ class ProfileWasUpdated implements Serializable{
 		return new self(
 			Uuid::fromString($data['uuid']),
 			Uuid::fromString($data['user_uuid']),
-			new Address($data['address']['city'], $data['address']['street'], $data['address']['house_number']),
+			new Address($data['Address']['city'], $data['Address']['street'], $data['Address']['house_number']),
 			new Contact($data['email'], $data['phone'])
 		);
 	}
@@ -55,7 +55,7 @@ class ProfileWasUpdated implements Serializable{
 		return [
 			'uuid' => $this->uuid->toString(),
 			'user_uuid' => $this->userUuid->toString(),
-		    'address' => [
+		    'Address' => [
 		        'city' => $this->address->city,
 		        'street' => $this->address->street,
 		        'house_number' => $this->address->houseNumber,

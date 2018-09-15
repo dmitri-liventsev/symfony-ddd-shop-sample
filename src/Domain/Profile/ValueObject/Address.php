@@ -6,14 +6,18 @@
 namespace App\Domain\Profile\ValueObject;
 
 
+use App\Domain\Profile\ValueObject\Address\City;
+use App\Domain\Profile\ValueObject\Address\HouseNumber;
+use App\Domain\Profile\ValueObject\Address\Street;
+
 class Address {
-	/** @var string */
+	/** @var City  */
 	public $city;
 
-	/** @var string */
+	/** @var Street  */
 	public $street;
 
-	/** @var string */
+	/** @var HouseNumber  */
 	public $houseNumber;
 
 	/**
@@ -23,11 +27,18 @@ class Address {
 	 * @param $street
 	 * @param $houseNumber
 	 */
-	public function __construct($city, $street, $houseNumber) {
+	public function __construct(City $city, Street $street, HouseNumber $houseNumber) {
 		$this->city        = $city;
 		$this->street      = $street;
 		$this->houseNumber = $houseNumber;
 	}
+
+    /**
+     * @return Address
+     */
+	public static function createBlank() {
+        return new self(City::createBlank(), Street::createBlank(), HouseNumber::createBlank());
+    }
 
     /**
      * @return string

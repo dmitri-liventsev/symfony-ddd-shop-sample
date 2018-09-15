@@ -7,7 +7,12 @@ namespace App\Domain\Profile\Event;
 
 
 use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Address\City;
+use App\Domain\Profile\ValueObject\Address\HouseNumber;
+use App\Domain\Profile\ValueObject\Address\Street;
 use App\Domain\Profile\ValueObject\Contact;
+use App\Domain\Profile\ValueObject\Contact\Email;
+use App\Domain\Profile\ValueObject\Contact\Phone;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -38,15 +43,23 @@ class ProfileWasCreated implements Serializable {
 	}
 
 
-	/**
-	 * @return mixed The object instance
-	 */
+    /**
+     * @return mixed The object instance
+     * @throws \Assert\AssertionFailedException
+     */
 	public static function deserialize(array $data) {
 		return new self(
 			Uuid::fromString($data['uuid']),
 			Uuid::fromString($data['user_uuid']),
-			new Address($data['address']['city'], $data['address']['street'], $data['address']['house_number']),
-			new Contact($data['contact']['email'], $data['contact']['phone'])
+			new Address(
+			    City::fromString($data['Address']['city']),
+                Street::fromString($data['Address']['street']),
+                HouseNumber::fromString($data['Address']['house_number'])
+            ),
+			new Contact(
+			    Email::fromString($data['contact']['email']),
+                Phone::fromString($data['contact']['phone'])
+            )
 		);
 	}
 
@@ -57,14 +70,14 @@ class ProfileWasCreated implements Serializable {
 		return [
 			'uuid' => $this->uuid->toString(),
 			'user_uuid' => $this->userUuid->toString(),
-			'address' => [
-				'city' => $this->address->city,
-				'street' => $this->address->street,
-				'house_number' => $this->address->houseNumber,
+			'Address' => [
+				'city' => $this->address->city->toString(),
+				'street' => $this->address->street->toString(),
+				'house_number' => $this->address->houseNumber->toString(),
 			],
 			'contact' => [
-				'email' => $this->contact->email,
-				'phone' => $this->contact->phone
+				'email' => $this->contact->email->toString(),
+				'phone' => $this->contact->phone->toString()
 			]
 		];
 	}

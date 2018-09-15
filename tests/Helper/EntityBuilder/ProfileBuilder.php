@@ -22,7 +22,7 @@ class ProfileBuilder {
 		return Profile::deserialize([
 			'uuid' => Uuid::uuid4(),
 			'user_uuid' => $user->uuid(),
-			'address' => [
+			'Address' => [
 				'city' => Randomize::string(),
 				'street' => Randomize::string(),
 				'house_number' => Randomize::number(),

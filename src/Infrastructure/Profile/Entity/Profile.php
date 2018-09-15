@@ -3,8 +3,13 @@
 namespace App\Infrastructure\Profile\Entity;
 
 use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Address\City;
+use App\Domain\Profile\ValueObject\Address\HouseNumber;
+use App\Domain\Profile\ValueObject\Address\Street;
 use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Projection\ProfileViewInterface;
+use App\Domain\Profile\ValueObject\Contact\Email;
+use App\Domain\Profile\ValueObject\Contact\Phone;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -41,7 +46,12 @@ class Profile implements ProfileViewInterface{
 	}
 
 
-	public static function fromSerializable(Serializable $event): self
+    /**
+     * @param Serializable $event
+     * @return Profile
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function fromSerializable(Serializable $event): self
 	{
 		return self::deserialize($event->serialize());
 	}
@@ -56,15 +66,15 @@ class Profile implements ProfileViewInterface{
 		
 		//$city, $street, $houseNumber
 		$address = new Address(
-			$data['address']['city'],
-			$data['address']['street'],
-			$data['address']['house_number']
+		    City::fromString($data['Address']['city']),
+		    Street::fromString($data['Address']['street']),
+		    HouseNumber::fromString($data['Address']['house_number'])
 		);
 
 		//$email, $phone
 		$contact = new Contact(
-			$data['contact']['email'],
-			$data['contact']['phone']
+		    Email::fromString($data['contact']['email']),
+		    Phone::fromString($data['contact']['phone'])
 		);
 
 		$instance = new self($uuid, $userUuid, $address, $contact);
@@ -76,7 +86,7 @@ class Profile implements ProfileViewInterface{
 	{
 		return [
 			'uuid'        => $this->getId(),
-			'address' => [
+			'Address' => [
 				'city' => (string) $this->address->city,
 				'street' => (string) $this->address->street,
 				'house_number' => (string) $this->address->houseNumber,

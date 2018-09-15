@@ -12,7 +12,7 @@ doctrine:
         port:     "3306"
         dbname:   "ddd-shop"
         user:     "root"
-        password: "Test1234"
+        password: ""
         charset:  UTF8
         server_version: '5.7'
         types:

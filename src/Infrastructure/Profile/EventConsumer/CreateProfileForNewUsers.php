@@ -8,9 +8,14 @@ namespace App\Infrastructure\Profile\EventConsumer;
 use App\Domain\Profile\Factory\ProfileFactory;
 use App\Domain\Profile\Repository\ProfileStoreInterface;
 use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Address\City;
+use App\Domain\Profile\ValueObject\Address\HouseNumber;
+use App\Domain\Profile\ValueObject\Address\Street;
 use App\Domain\Profile\ValueObject\Contact;
 use App\Domain\Profile\Repository\ProfileModelRepositoryInterface;
+use App\Domain\Profile\ValueObject\Contact\Phone;
 use App\Domain\User\Event\UserWasCreated;
+use App\Domain\User\ValueObject\Email;
 use App\Infrastructure\Profile\Entity\Profile;
 use Broadway\ReadModel\Projector;
 use Ramsey\Uuid\Uuid;
@@ -39,12 +44,16 @@ class CreateProfileForNewUsers extends Projector {
 		$this->profileStore = $profileStore;
 	}
 
-	protected function applyUserWasCreated(UserWasCreated $event) {
+    /**
+     * @param UserWasCreated $event
+     * @throws \Exception
+     */
+    protected function applyUserWasCreated(UserWasCreated $event) {
 		$uuid = Uuid::uuid4();
-		$address = new Address("", "", "");
-		$contact = new Contact("", "");
+		$address = Address::createBlank();
+		$contact = Contact::createBlank();
 
-		$profileAgragator = $this->profileFactory->create($uuid, $event->uuid, $address, $contact);
-		$this->profileStore->store($profileAgragator);
+		$profileAggregator = $this->profileFactory->create($uuid, $event->uuid, $address, $contact);
+		$this->profileStore->store($profileAggregator);
 	}
 }

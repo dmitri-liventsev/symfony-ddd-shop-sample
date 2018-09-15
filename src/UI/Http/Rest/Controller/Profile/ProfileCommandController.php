@@ -7,7 +7,12 @@ namespace App\UI\Http\Rest\Controller\Profile;
 
 use App\Application\Command\Profile\ChangeProfile\ChangeProfileCommand;
 use App\Domain\Profile\ValueObject\Address;
+use App\Domain\Profile\ValueObject\Address\City;
+use App\Domain\Profile\ValueObject\Address\HouseNumber;
+use App\Domain\Profile\ValueObject\Address\Street;
 use App\Domain\Profile\ValueObject\Contact;
+use App\Domain\Profile\ValueObject\Contact\Email;
+use App\Domain\Profile\ValueObject\Contact\Phone;
 use App\UI\Http\Rest\Controller\CommandController;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -52,8 +57,8 @@ class ProfileCommandController extends CommandController {
 		Assertion::notNull($contactEmail, "Email can\'t be null");
 		Assertion::notNull($contactPhone, "Phone number can\'t be null");
 
-		$address = new Address($addressCity, $addressStreet, $addressHouseNumber);
-		$contact = new Contact($contactEmail, $contactPhone);
+		$address = new Address(City::fromString($addressCity), Street::fromString($addressStreet), HouseNumber::fromString($addressHouseNumber));
+		$contact = new Contact(Email::fromString($contactEmail), Phone::fromString($contactPhone));
 
 		$commandRequest = new ChangeProfileCommand($userUuidString, $address, $contact);
 		$this->exec($commandRequest);

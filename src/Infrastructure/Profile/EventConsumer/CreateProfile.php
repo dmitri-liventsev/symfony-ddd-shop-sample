@@ -37,7 +37,11 @@ class CreateProfile extends Projector {
 		$this->profileStore = $profileStore;
 	}
 
-	protected function applyProfileWasCreated(ProfileWasCreated $event) {
+    /**
+     * @param ProfileWasCreated $event
+     * @throws \Assert\AssertionFailedException
+     */
+    protected function applyProfileWasCreated(ProfileWasCreated $event) {
 		$userReadModel = Profile::fromSerializable($event);
 
 		$this->repository->add($userReadModel);
