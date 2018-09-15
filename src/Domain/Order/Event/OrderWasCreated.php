@@ -63,7 +63,7 @@ class OrderWasCreated implements Serializable {
 		    'order_item' => [
 		    	'uuid' => $this->orderItem->getUuid()->toString(),
 		    	'product_uuid' => $this->orderItem->getProductUuid()->toString(),
-		    	'amount' => $this->orderItem->getAmount()
+		    	'amount' => $this->orderItem->getAmount()->toInteger()
 		    ],
 		    'customer' => [
 		    	'uuid' => $this->customer->getUuid()->toString(),

@@ -28,9 +28,10 @@ class OrderItem implements OrderItemViewInterface {
 	 * @param string|UuidInterface $uuid
 	 * @param int     $amount
 	 */
-	public function __construct(UuidInterface $productUuid, $amount, $uuid) {
+	public function __construct(UuidInterface $productUuid, int $amount, $uuid) {
 		$this->uuid = is_string($uuid) ? Uuid::fromString($uuid) : $uuid;
-		$this->productUuid = is_string($productUuid) ? Uuid::fromString($productUuid) : $productUuid;;
+		$this->productUuid = is_string($productUuid) ? Uuid::fromString($productUuid) : $productUuid;
+
 		$this->amount  = $amount;
 	}
 
@@ -42,9 +43,10 @@ class OrderItem implements OrderItemViewInterface {
 		return $this->amount;
 	}
 
-	/**
-	 * @throws \Assert\AssertionFailedException
-	 */
+    /**
+     * @param array $data
+     * @return OrderItem
+     */
 	public static function deserialize(array $data): self
 	{
 		return new self(Uuid::fromString($data["product_uuid"]), $data["amount"], Uuid::fromString($data["uuid"]));

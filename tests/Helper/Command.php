@@ -56,7 +56,7 @@ class Command {
 	}
 
 	public static function purchaseProduct(UuidInterface $orderUuid, User $user, Product $product, int $amount, Client $client) {
-        $signUp = new PurchaseProductCommand(
+        $purchaseProduct = new PurchaseProductCommand(
             $orderUuid->toString(),
             $user->uuid()->toString(),
             $product->getUuid()->toString(),
@@ -65,6 +65,6 @@ class Command {
 
         /** @var CommandBus $commandBus */
         $commandBus = $client->getContainer()->get('tactician.commandbus.command');
-        $commandBus->handle($signUp);
+        $commandBus->handle($purchaseProduct);
     }
 }

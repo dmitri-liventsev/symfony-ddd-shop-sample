@@ -24,7 +24,11 @@ class OrderWasCreatedConsumer extends Projector {
 		$this->repository = $repository;
 	}
 
-	protected function applyOrderWasCreated(OrderWasCreated $event) {
+    /**
+     * @param OrderWasCreated $event
+     * @throws \Assert\AssertionFailedException
+     */
+    protected function applyOrderWasCreated(OrderWasCreated $event) {
 		$orderEntity = Order::fromSerializable($event);
 
 		$this->repository->add($orderEntity);

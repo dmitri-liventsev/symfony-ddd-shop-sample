@@ -5,6 +5,7 @@ namespace App\Application\Command\Order\PurchaseProduct;
 use App\Application\Command\CommandHandlerInterface;
 use App\Domain\Order\Factory\OrderFactory;
 use App\Domain\Order\Repository\OrderStoreInterface;
+use App\Domain\Order\ValueObject\OrderItem\Amount;
 
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
@@ -23,9 +24,14 @@ class PurchaseProductHandler implements CommandHandlerInterface {
 		$this->orderFactory = $orderFactory;
 	}
 
-	public function __invoke(PurchaseProductCommand $command): void
+    /**
+     * @param PurchaseProductCommand $command
+     * @throws \Exception
+     */
+    public function __invoke(PurchaseProductCommand $command): void
 	{
-		$order = $this->orderFactory->purchaseProduct($command->uuid, $command->userUuid, $command->productUuid, $command->amount);
+	    $amount = Amount::fromInt($command->amount);
+        $order = $this->orderFactory->purchaseProduct($command->uuid, $command->userUuid, $command->productUuid, $amount);
 		$this->orderStore->store($order);
 	}
 }

@@ -36,7 +36,12 @@ class Order implements OrderViewInterface, JsonSerializable {
 		$this->customer  = $customer;
 	}
 
-	public static function fromSerializable(Serializable $event): self
+    /**
+     * @param Serializable $event
+     * @return Order
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function fromSerializable(Serializable $event): self
 	{
 		return self::deserialize($event->serialize());
 	}

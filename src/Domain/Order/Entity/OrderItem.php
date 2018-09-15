@@ -6,6 +6,7 @@
 namespace App\Domain\Order\Entity;
 
 
+use App\Domain\Order\ValueObject\OrderItem\Amount;
 use Ramsey\Uuid\UuidInterface;
 
 class OrderItem {
@@ -15,7 +16,7 @@ class OrderItem {
 	/** @var  UuidInterface */
 	private $productUuid;
 
-	/** @var  int */
+	/** @var Amount */
 	private $amount;
 
 	/**
@@ -23,9 +24,9 @@ class OrderItem {
 	 *
 	 * @param UuidInterface $uuid
 	 * @param UuidInterface $productUuid
-	 * @param int           $amount
+	 * @param Amount        $amount
 	 */
-	public function __construct(UuidInterface $uuid, UuidInterface $productUuid, $amount) {
+	public function __construct(UuidInterface $uuid, UuidInterface $productUuid, Amount $amount) {
 		$this->uuid        = $uuid;
 		$this->productUuid = $productUuid;
 		$this->amount      = $amount;
@@ -62,14 +63,14 @@ class OrderItem {
 	/**
 	 * @return int
 	 */
-	public function getAmount(): int {
+	public function getAmount(): Amount {
 		return $this->amount;
 	}
 
 	/**
 	 * @param int $amount
 	 */
-	public function setAmount(int $amount) {
+	public function setAmount(Amount $amount) {
 		$this->amount = $amount;
 	}
 

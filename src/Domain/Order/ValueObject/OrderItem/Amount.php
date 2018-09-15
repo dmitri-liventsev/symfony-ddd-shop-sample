@@ -2,44 +2,44 @@
 /**
  * Created by PhpStorm.
  * User: Akar
- * Date: 14.09.2018
- * Time: 23:14
+ * Date: 16.09.2018
+ * Time: 0:34
  */
 
-namespace App\Domain\Product\ValueObject;
+namespace App\Domain\Order\ValueObject\OrderItem;
 
 
 use Assert\Assertion;
 
-class Price
+class Amount
 {
-    private $price;
+    private $amount;
 
     /**
      * Price constructor.
-     * @param $price
+     * @param $amount
      */
-    private function __construct($price)
+    private function __construct($amount)
     {
-        $this->price = $price;
+        $this->amount = $amount;
     }
 
     /**
-     * @param string $price
-     * @return Price
+     * @param string $amount
+     * @return Amount
      */
-    public static function fromString(string $price): self
+    public static function fromString(string $amount): self
     {
-        $price = (int) $price;
+        $amount = (int) $amount;
 
-        self::validate($price);
+        self::validate($amount);
 
-        return new self($price);
+        return new self($amount);
     }
 
     /**
      * @param int $price
-     * @return Price
+     * @return Amount
      */
     public static function fromInt(int $price): self
     {
@@ -49,7 +49,7 @@ class Price
     }
 
     /**
-     * @return Price
+     * @return Amount
      */
     public static function createBlank() {
         return new self(0);
@@ -60,7 +60,7 @@ class Price
      */
     public function toString(): string
     {
-        return $this->price;
+        return $this->amount;
     }
 
     /**
@@ -68,7 +68,7 @@ class Price
      */
     public function __toString(): string
     {
-        return $this->price;
+        return $this->amount;
     }
 
     /**
@@ -76,7 +76,7 @@ class Price
      */
     public function toInteger(): int
     {
-        return (int) $this->price;
+        return (int) $this->amount;
     }
 
     /**
