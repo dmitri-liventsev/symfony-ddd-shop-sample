@@ -36,6 +36,10 @@ class Command {
 		$commandBus->handle($signUp);
 	}
 
+    /**
+     * @param Product $product
+     * @param Client $client
+     */
 	public static function createProduct(Product $product, Client $client): void
 	{
 		$createProductCommand = new CreateProductCommand(

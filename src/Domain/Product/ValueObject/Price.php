@@ -28,7 +28,20 @@ class Price
      * @param int $price
      * @return Price
      */
-    public static function fromString(int $price): self
+    public static function fromString(string $price): self
+    {
+        $price = (int) $price;
+
+        self::validate($price);
+
+        return new self($price);
+    }
+
+    /**
+     * @param int $price
+     * @return Price
+     */
+    public static function fromInt(int $price): self
     {
         self::validate($price);
 
@@ -56,6 +69,14 @@ class Price
     public function __toString(): string
     {
         return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function toInteger(): int
+    {
+        return (int) $this->price;
     }
 
     /**

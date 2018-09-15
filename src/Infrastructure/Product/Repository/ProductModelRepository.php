@@ -14,12 +14,19 @@ use Ramsey\Uuid\UuidInterface;
  */
 class ProductModelRepository extends MysqlRepository implements ProductModelRepositoryInterface {
 
+    /**
+     * ProductModelRepository constructor.
+     * @param EntityManagerInterface $entityManager
+     */
 	public function __construct(EntityManagerInterface $entityManager)
 	{
 		$this->class = Product::class;
 		parent::__construct($entityManager);
 	}
 
+    /**
+     * @return mixed
+     */
 	public function findAllAvailableProducts() {
 		$qb = $this->repository
 			->createQueryBuilder('product')
@@ -30,6 +37,9 @@ class ProductModelRepository extends MysqlRepository implements ProductModelRepo
 		return $this->execute($qb);
 	}
 
+    /**
+     * @param ProductViewInterface $productView
+     */
 	public function add(ProductViewInterface $productView) {
 		$this->register($productView);
 	}

@@ -2,6 +2,8 @@
 
 namespace App\Domain\Product\Projection;
 
+use App\Domain\Product\ValueObject\ProductOnStock;
+
 /**
  * @author Dmitri Liventsev <dmitri.liventsev@tacticrealtime.com>
  */

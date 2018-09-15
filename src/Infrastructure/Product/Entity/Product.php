@@ -6,9 +6,13 @@
 namespace App\Infrastructure\Product\Entity;
 
 use App\Domain\Product\Projection\ProductViewInterface;
+use App\Domain\Product\ValueObject\Name;
+use App\Domain\Product\ValueObject\Price;
+use App\Domain\Product\ValueObject\ProductOnStock;
 use App\Infrastructure\Product\Exception\NumberOnStockIsLessThanZero;
 use Broadway\Serializer\Serializable;
 use JsonSerializable;
+use Money\Money;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -18,7 +22,7 @@ class Product implements ProductViewInterface, JsonSerializable {
 	/** @var  UuidInterface */
 	private $uuid;
 
-	/** @var  string */
+	/** @var Name */
 	private $name;
 
 	/** @var int */
@@ -27,18 +31,18 @@ class Product implements ProductViewInterface, JsonSerializable {
 	/** @var  String */
 	private $productType;
 
-	/** @var  int */
+	/** @var int */
 	private $price;
 
-	/**
-	 * Product constructor.
-	 *
-	 * @param $uuid
-	 * @param $productsOnStock
-	 * @param $productType
-	 * @param $price
-	 */
-	public function __construct($uuid, $name, $productsOnStock, $productType, $price) {
+    /**
+     * Product constructor.
+     * @param $uuid
+     * @param string $name
+     * @param int $productsOnStock
+     * @param $productType
+     * @param int $price
+     */
+	public function __construct($uuid, string $name, int $productsOnStock, $productType, int $price) {
 		$this->uuid = is_string($uuid) ? Uuid::fromString($uuid) : $uuid;
 		$this->name = $name;
 		$this->productsOnStock = $productsOnStock;
@@ -70,7 +74,11 @@ class Product implements ProductViewInterface, JsonSerializable {
 		return $this->uuid;
 	}
 
-	public function reduceNumberOfProductsOnStock(int $amount): void {
+    /**
+     * @param int $amount
+     * @throws NumberOnStockIsLessThanZero
+     */
+    public function reduceNumberOfProductsOnStock(int $amount): void {
 		$this->productsOnStock -= $amount;
 		if ($this->productsOnStock < 0) {
 			throw new NumberOnStockIsLessThanZero();

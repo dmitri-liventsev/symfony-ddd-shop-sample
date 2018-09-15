@@ -9,6 +9,9 @@
 namespace App\Tests\Helper\EntityBuilder;
 
 
+use App\Domain\Product\ValueObject\Name;
+use App\Domain\Product\ValueObject\Price;
+use App\Domain\Product\ValueObject\ProductOnStock;
 use App\Infrastructure\Product\Entity\Product;
 use App\Tests\Helper\Randomize;
 use Ramsey\Uuid\Uuid;

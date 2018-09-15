@@ -25,10 +25,10 @@ class Name
     }
 
     /**
-     * @param int $name
+     * @param string $name
      * @return Name
      */
-    public static function fromString(int $name): self
+    public static function fromString(string $name): self
     {
         self::validate($name);
 

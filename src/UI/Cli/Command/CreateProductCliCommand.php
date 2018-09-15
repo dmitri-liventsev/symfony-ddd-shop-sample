@@ -6,6 +6,9 @@
 namespace App\UI\Cli\Command;
 
 use App\Application\Command\Product\CreateProduct\CreateProductCommand;
+use App\Domain\Product\ValueObject\Name;
+use App\Domain\Product\ValueObject\Price;
+use App\Domain\Product\ValueObject\ProductOnStock;
 use League\Tactician\CommandBus;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
@@ -44,13 +47,20 @@ class CreateProductCliCommand extends Command {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$command = new CreateProductCommand(
-			$uuid = ($input->getArgument('uuid') ?: Uuid::uuid4()->toString()),
-			$name = $input->getArgument('name'),
-			$amount = $input->getArgument('product_on_stock'),
-			$type = $input->getArgument('type')?: 'Book',
-			$price = $input->getArgument('price')?: 0
-		);
+
+        $uuid = ($input->getArgument('uuid') ?: Uuid::uuid4()->toString());
+        $name = $input->getArgument('name');
+        $amount = $input->getArgument('product_on_stock');
+        $type = $input->getArgument('type')?: 'Book';
+        $price = $input->getArgument('price')?: 0;
+
+        $command = new CreateProductCommand(
+            $uuid,
+            Name::fromString($name),
+            ProductOnStock::fromString($amount),
+            $type,
+            Price::fromString($price)
+        );
 
 		$this->commandBus->handle($command);
 

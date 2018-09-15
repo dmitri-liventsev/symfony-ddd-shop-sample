@@ -7,17 +7,20 @@ namespace App\Domain\Product;
 
 
 use App\Domain\Product\Event\ProductWasCreated;
+use App\Domain\Product\ValueObject\Name;
+use App\Domain\Product\ValueObject\Price;
+use App\Domain\Product\ValueObject\ProductOnStock;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Ramsey\Uuid\UuidInterface;
 
 class Product extends EventSourcedAggregateRoot {
 	/** @var UuidInterface */
 	private $uuid;
-	/** @var  string */
+	/** @var  Name */
 	private $name;
 	/** @var  string */
 	private $type;
-	/** @var  int */
+	/** @var  Price */
 	private $price;
 
 	/**
@@ -28,7 +31,7 @@ class Product extends EventSourcedAggregateRoot {
 		return $this->uuid->toString();
 	}
 
-	public static function create(UuidInterface $uuid, $name, $productOnStock, $type, $price) : self {
+	public static function create(UuidInterface $uuid, Name $name, ProductOnStock $productOnStock, $type, Price $price) : self {
 		$product = new self();
 		$product->apply(new ProductWasCreated($uuid, $name, $productOnStock, $type, $price));
 
@@ -59,16 +62,16 @@ class Product extends EventSourcedAggregateRoot {
 	}
 
 	/**
-	 * @return string
+	 * @return Name
 	 */
-	public function getName(): string {
+	public function getName(): Name {
 		return $this->name;
 	}
 
 	/**
-	 * @param string $name
+	 * @param Name $name
 	 */
-	public function setName(string $name) {
+	public function setName(Name $name) {
 		$this->name = $name;
 	}
 
@@ -87,16 +90,16 @@ class Product extends EventSourcedAggregateRoot {
 	}
 
 	/**
-	 * @return int
+	 * @return Price
 	 */
-	public function getPrice(): int {
+	public function getPrice(): Price {
 		return $this->price;
 	}
 
 	/**
 	 * @param int $price
 	 */
-	public function setPrice(int $price) {
+	public function setPrice(Price $price) {
 		$this->price = $price;
 	}
 }
