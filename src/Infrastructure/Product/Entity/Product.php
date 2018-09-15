@@ -7,12 +7,9 @@ namespace App\Infrastructure\Product\Entity;
 
 use App\Domain\Product\Projection\ProductViewInterface;
 use App\Domain\Product\ValueObject\Name;
-use App\Domain\Product\ValueObject\Price;
-use App\Domain\Product\ValueObject\ProductOnStock;
 use App\Infrastructure\Product\Exception\NumberOnStockIsLessThanZero;
 use Broadway\Serializer\Serializable;
 use JsonSerializable;
-use Money\Money;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
