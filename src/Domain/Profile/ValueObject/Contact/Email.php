@@ -12,12 +12,11 @@ class Email
     /**
      * @throws \Assert\AssertionFailedException
      */
-    public static function fromString(string $email): self
+    public static function fromString(string $email = ''): self
     {
-        if(strlen($email) > 0) {
-            Assertion::email($email, 'Not a valid email');
+        if($email !== '') {
+            self::validate($email);
         }
-
 
         return new self($email);
     }
@@ -51,5 +50,13 @@ class Email
      */
     private function __construct($email) {
         $this->email = $email;
+    }
+
+    /**
+     * @param $value
+     * @throws \Assert\AssertionFailedException
+     */
+    private static function validate($value) {
+        Assertion::email($value, 'Not a valid email');
     }
 }

@@ -9,6 +9,8 @@
 namespace App\Domain\Profile\ValueObject\Address;
 
 
+use Assert\Assertion;
+
 class HouseNumber
 {
     private $houseNumber;
@@ -26,9 +28,11 @@ class HouseNumber
      * @param string $houseNumber
      * @return City
      */
-    public static function fromString(string $houseNumber): self
+    public static function fromString($houseNumber = ''): self
     {
-        //Implement validation
+        if($houseNumber !== '') {
+            self::validate($houseNumber);
+        }
 
         return new self($houseNumber);
     }
@@ -54,5 +58,12 @@ class HouseNumber
     public function __toString(): string
     {
         return $this->houseNumber;
+    }
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan($value, 0); //Its funny but some houses can have house number - 0
     }
 }

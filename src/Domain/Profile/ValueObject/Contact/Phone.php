@@ -8,6 +8,8 @@
 
 namespace App\Domain\Profile\ValueObject\Contact;
 
+use Assert\Assertion;
+
 class Phone
 {
     private $phone;
@@ -25,9 +27,11 @@ class Phone
      * @param string $phone
      * @return Phone
      */
-    public static function fromString(string $phone): self
+    public static function fromString(string $phone = ''): self
     {
-        //Implement validation
+        if($phone !== '') {
+            self::validate($phone);
+        }
 
         return new self($phone);
     }
@@ -53,5 +57,13 @@ class Phone
     public function __toString(): string
     {
         return $this->phone;
+    }
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan(strlen($value), 5);
+        Assertion::lessOrEqualThan(strlen($value), 15);
     }
 }

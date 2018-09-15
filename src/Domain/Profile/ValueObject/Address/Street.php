@@ -8,6 +8,7 @@
 
 namespace App\Domain\Profile\ValueObject\Address;
 
+use Assert\Assertion;
 
 class Street
 {
@@ -26,9 +27,11 @@ class Street
      * @param string $street
      * @return Street
      */
-    public static function fromString(string $street): self
+    public static function fromString(string $street = ''): self
     {
-        //Implement validation
+        if($street !== '') {
+          self::validate($street);
+        }
 
         return new self($street);
     }
@@ -54,5 +57,13 @@ class Street
     public function __toString(): string
     {
         return $this->street;
+    }
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan(strlen($value), 2);
+        Assertion::lessOrEqualThan(strlen($value), 64);
     }
 }

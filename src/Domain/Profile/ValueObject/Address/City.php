@@ -9,6 +9,8 @@
 namespace App\Domain\Profile\ValueObject\Address;
 
 
+use Assert\Assertion;
+
 class City
 {
     private $city;
@@ -28,7 +30,9 @@ class City
      */
     public static function fromString(string $city): self
     {
-        //Implement validation
+        if($city !== '') {
+            self::validate($city);
+        }
 
         return new self($city);
     }
@@ -54,5 +58,13 @@ class City
     public function __toString(): string
     {
         return $this->city;
+    }
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan(strlen($value), 2);
+        Assertion::lessOrEqualThan(strlen($value), 64);
     }
 }

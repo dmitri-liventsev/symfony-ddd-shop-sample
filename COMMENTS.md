@@ -2,13 +2,6 @@
  - Product.name
  - Product.type
  - Product.price - should extend some Money class, there are few in open source.
- 
- - Profile.Address.City
- - Profile.Address.Street
- - Profile.Address.HouseNumber
- 
- - Profile.Contact.Email
- - Profile.Contact.Phone
   
 ### ORM assumptions
   Product type should be entity, not a string
