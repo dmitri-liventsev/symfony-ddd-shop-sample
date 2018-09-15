@@ -10,6 +10,8 @@ class Email
     private $email;
 
     /**
+     * @param string $email
+     * @return Email
      * @throws \Assert\AssertionFailedException
      */
     public static function fromString(string $email = ''): self

@@ -1,6 +1,4 @@
 ### Not implemented ObjectValues:
- - Product.name
- - Product.type
  - Product.price - should extend some Money class, there are few in open source.
   
 ### ORM assumptions

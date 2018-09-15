@@ -30,7 +30,7 @@ class Price
      */
     public static function fromString(int $price): self
     {
-        //Implement validation
+        self::validate($price);
 
         return new self($price);
     }
@@ -56,5 +56,12 @@ class Price
     public function __toString(): string
     {
         return $this->price;
+    }
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan($value, 0);
     }
 }

@@ -9,6 +9,8 @@
 namespace App\Domain\Product\ValueObject;
 
 
+use Assert\Assertion;
+
 class Name
 {
     private $name;
@@ -28,7 +30,7 @@ class Name
      */
     public static function fromString(int $name): self
     {
-        //Implement validation
+        self::validate($name);
 
         return new self($name);
     }
@@ -54,5 +56,14 @@ class Name
     public function __toString(): string
     {
         return $this->name;
+    }
+
+
+    /**
+     * @param $value
+     */
+    private static function validate($value) {
+        Assertion::greaterOrEqualThan(strlen($value), 2);
+        Assertion::lessOrEqualThan(strlen($value), 64);
     }
 }
