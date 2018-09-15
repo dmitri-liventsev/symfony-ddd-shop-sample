@@ -64,13 +64,6 @@ class Address {
         return $this->street;
     }
 
-    /**
-     * @param string $street
-     */
-    public function setStreet(string $street): void
-    {
-        $this->street = $street;
-    }
 
     /**
      * @return string
@@ -78,13 +71,5 @@ class Address {
     public function getHouseNumber(): string
     {
         return $this->houseNumber;
-    }
-
-    /**
-     * @param string $houseNumber
-     */
-    public function setHouseNumber(string $houseNumber): void
-    {
-        $this->houseNumber = $houseNumber;
     }
 }

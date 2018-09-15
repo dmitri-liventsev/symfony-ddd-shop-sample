@@ -42,26 +42,10 @@ class Contact {
     }
 
     /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
      * @return mixed
      */
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * @param mixed $phone
-     */
-    public function setPhone($phone): void
-    {
-        $this->phone = $phone;
     }
 }
